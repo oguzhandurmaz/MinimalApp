@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Games"
+       >
+        <menu>
+            <group
+                android:id="@+id/games"
+                >
+                <item
+                    android:id="@+id/rubik"
+                    android:title="Rubik Cube"
+                    />
+                <item
+                    android:id="@+id/backGammon"
+                    android:title="Backgammon"
+                    />
+                <item
+                    android:id="@+id/draught"
+                    android:title="Draughts"
+                    />
+                <item
+                    android:id="@+id/mangala"
+                    android:title="Mangala"
+                    />
+
+            </group>
+
+        </menu>
+    </item>
+
+    <item
+        android:title="Sport">
+        <menu>
+            <group
+                >
+                <item
+                    android:id="@+id/doSport"
+                    android:title="Do Sport"
+                    />
+
+            </group>
+
+        </menu>
+    </item>
+
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        />
+    <item
+        android:id="@+id/purpose"
+        android:title="Purpose of The App"
+        />
+    <item
+        android:id="@+id/about"
+        android:title="About"
+        />
+
+</menu>

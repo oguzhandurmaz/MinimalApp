@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rightmargin">120dp</dimen>
+    <dimen name="counttextsize">50sp</dimen>
+    <dimen name="timetextsize">30sp</dimen>
+    <dimen name="datetextsize">20sp</dimen>
+
+</resources>
