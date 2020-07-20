@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        tools:context=".CountFragment">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="125dp"
+                android:layout_marginStart="10dp"
+                android:elevation="4dp"
+                android:translationZ="4dp"
+                android:text="Date\n20-12\n2020"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                android:background="@drawable/textview_date_shape"/>
+
+
+            <TextView
+                android:id="@+id/text_count"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:elevation="4dp"
+                android:translationZ="4dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textSize="40dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                android:text="Count\n200"
+                android:background="@drawable/textview_count_shape" />
+
+
+            <TextView
+                android:id="@+id/text_time"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:elevation="4dp"
+                android:translationZ="4dp"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                android:text="Time\n300"
+                android:background="@drawable/textview_time_shape" />
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="4dp"
+            android:translationZ="4dp"
+            android:text="Start"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:background="@drawable/button_start_shape"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
+
+
+
+    </LinearLayout>
+
+</layout>
