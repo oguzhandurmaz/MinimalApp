@@ -7,7 +7,7 @@
     android:layout_margin="2dp"
     android:elevation="4dp"
     android:translationZ="4dp"
-    app:cardBackgroundColor="@color/light_purple"
+    app:cardBackgroundColor="@color/light_pink"
     app:cardCornerRadius="5dp"
     tools:context=".FetchedBooksFragment">
 
@@ -22,7 +22,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_more"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,21 +34,22 @@
             android:background="@drawable/recyclerview_book_info_bg_shape"
             android:elevation="4dp"
             android:translationZ="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/recycler_book_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
             android:id="@+id/favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:button="@drawable/checkbox_favorite_selection"
             android:elevation="4dp"
             android:scaleType="center"
             android:translationZ="4dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/recycler_info_bg"
             app:layout_constraintEnd_toEndOf="@id/recycler_info_bg" />
 
@@ -71,6 +72,7 @@
             app:layout_constraintStart_toStartOf="@+id/recycler_info_bg"
             app:layout_constraintTop_toTopOf="@+id/recycler_info_bg" />
 
+
         <TextView
             android:id="@+id/recycler_book_author"
             android:layout_width="0dp"
@@ -87,6 +89,21 @@
             app:layout_constraintStart_toStartOf="@+id/recycler_book_title"
             app:layout_constraintTop_toBottomOf="@+id/recycler_book_title" />
 
+
+
+        <TextView
+            android:id="@+id/text_more"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="6dp"
+            android:textSize="16dp"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_book_image"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

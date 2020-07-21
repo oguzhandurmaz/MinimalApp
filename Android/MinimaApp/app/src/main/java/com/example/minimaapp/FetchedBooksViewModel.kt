@@ -11,16 +11,16 @@ class FetchedBooksViewModel(application: Application): AndroidViewModel(applicat
     val books: LiveData<List<Book>>
         get() = _books
 
-    private var countRepository: CountRepository
+    private var bookRepository: BookRepository
 
     init {
-        val countDao = CountRoomDatabase.getDataBase(application).countDao()
+        val bookDao = CountRoomDatabase.getDataBase(application).bookDao()
 
-        countRepository = CountRepository(countDao)
+        bookRepository= BookRepository(bookDao)
     }
 
     fun getBooks() = viewModelScope.launch{
-        _books.value = countRepository.getBooks()
+        _books.value = bookRepository.fetchBooks()
     }
 
 

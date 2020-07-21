@@ -5,10 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Count::class],version = 1,exportSchema = true)
+@Database(entities = [Count::class,BookTable::class],version = 1,exportSchema = true)
 abstract class CountRoomDatabase: RoomDatabase() {
 
     abstract fun countDao(): CountDao
+    abstract fun bookDao(): BookDao
 
     companion object{
 

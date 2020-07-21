@@ -1,31 +1,22 @@
 package com.example.minimaapp
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import java.io.IOException
 import java.util.*
 
-class CountRepository(private val countDao: CountDao) {
+class BookRepository(private val bookDao: BookDao) {
 
-    val countSeven = countDao.getLastSevenData()
 
-    /*suspend fun getDataSeven(): List<Count>{
-        return countDao.getLastSevenData()
-    }
-*/
 
-    suspend fun insert(count: Count) {
-        countDao.insert(count)
-    }
+    suspend fun insert(bookTable: BookTable) = bookDao.insert(bookTable)
 
-    suspend fun getAllData(): List<Count> {
-        return countDao.getAllData()
-    }
 
-    suspend fun getBooks(): List<Book> {
-        return withContext(IO){
+    suspend fun fetchBooks(): List<Book> {
+        return withContext(Dispatchers.IO){
             try {
                 val bookList = mutableListOf<Book>()
                 val calendar = Calendar.getInstance()
@@ -54,12 +45,6 @@ class CountRepository(private val countDao: CountDao) {
                         .select("a")
                         .eq(0)
                         .text()
-
-                    //Get Book Detail
-                   /* val docDetail = Jsoup.connect(bookDetailUrl).get()
-                    val elements = docDetail.select("div.oge.metin")
-                        .eq(0)
-                    val bookDetail = elements.text()*/
                     bookList.add(Book(imgUrl, title, subTitle, bookDetailUrl))
                 }
 
@@ -69,5 +54,15 @@ class CountRepository(private val countDao: CountDao) {
             }
 
         }
+    }
+
+    suspend fun getBookDetail(url: String): String{
+        return withContext(IO){
+            val docDetail = Jsoup.connect(url).get()
+            val elements = docDetail.select("div.oge.metin")
+                .eq(0)
+            return@withContext elements.text()
+        }
+
     }
 }

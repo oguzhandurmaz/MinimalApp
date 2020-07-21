@@ -8,12 +8,20 @@
         android:layout_height="wrap_content"
         tools:context=".FetchedBooksFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_books"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_books"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
