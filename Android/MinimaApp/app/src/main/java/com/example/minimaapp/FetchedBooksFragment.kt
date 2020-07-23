@@ -57,7 +57,7 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener{
         fetchBooks()
 
         viewModel.books.observe(viewLifecycleOwner, Observer {
-            it?.let { adapter.setData(it) }
+            it?.let { adapter.submitList(it) }
             if(it.isEmpty()){
                 Toast.makeText(requireContext(),"Couldn't Load Books",Toast.LENGTH_SHORT).show()
             }

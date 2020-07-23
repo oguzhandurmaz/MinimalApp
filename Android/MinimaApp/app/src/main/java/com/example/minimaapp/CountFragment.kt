@@ -39,7 +39,7 @@ class CountFragment : Fragment() {
 
 
         viewModel.countDataSeven.observe(viewLifecycleOwner, Observer {
-            it?.let { adapter.setData(it) }
+            it?.let { adapter.submitList(it) }
         })
 
         binding.btnStart.setOnClickListener {

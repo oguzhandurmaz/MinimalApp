@@ -1,8 +1,10 @@
 package com.example.minimaapp
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import com.example.minimaapp.dao.CountDao
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers.Main
 import org.jsoup.Jsoup
 import java.io.IOException
 import java.util.*
@@ -16,6 +18,7 @@ class CountRepository(private val countDao: CountDao) {
     }
 */
 
+
     suspend fun insert(count: Count) {
         countDao.insert(count)
     }
@@ -25,7 +28,7 @@ class CountRepository(private val countDao: CountDao) {
     }
 
     suspend fun getBooks(): List<Book> {
-        return withContext(IO){
+        return withContext(IO) {
             try {
                 val bookList = mutableListOf<Book>()
                 val calendar = Calendar.getInstance()
@@ -56,10 +59,10 @@ class CountRepository(private val countDao: CountDao) {
                         .text()
 
                     //Get Book Detail
-                   /* val docDetail = Jsoup.connect(bookDetailUrl).get()
-                    val elements = docDetail.select("div.oge.metin")
-                        .eq(0)
-                    val bookDetail = elements.text()*/
+                    /* val docDetail = Jsoup.connect(bookDetailUrl).get()
+                     val elements = docDetail.select("div.oge.metin")
+                         .eq(0)
+                     val bookDetail = elements.text()*/
                     bookList.add(Book(imgUrl, title, subTitle, bookDetailUrl))
                 }
 

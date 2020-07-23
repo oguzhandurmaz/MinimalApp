@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.minimaapp.dao.BookDao
+import com.example.minimaapp.dao.CountDao
 
 @Database(entities = [Count::class,BookTable::class],version = 1,exportSchema = true)
 abstract class CountRoomDatabase: RoomDatabase() {
@@ -27,6 +29,7 @@ abstract class CountRoomDatabase: RoomDatabase() {
                     context.applicationContext,
                     CountRoomDatabase::class.java,
                     "count_databse")
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 return instance

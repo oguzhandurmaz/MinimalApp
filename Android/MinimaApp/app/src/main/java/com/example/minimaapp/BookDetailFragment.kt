@@ -34,11 +34,12 @@ class BookDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentBookDetailBinding.inflate(inflater)
 
-
-
         //ViewModel
         viewModelFactory = BookDetailViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this,viewModelFactory).get(BookDetailViewModel::class.java)
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
         val args = BookDetailFragmentArgs.fromBundle(requireArguments())
         val imageUrl = args.imageUrl
@@ -59,9 +60,9 @@ class BookDetailFragment : Fragment() {
 
         viewModel.getBookDetail(detailUrl)
 
-        viewModel.fetchedBookDetail.observe(viewLifecycleOwner, Observer {
+        /*viewModel.fetchedBookDetail.observe(viewLifecycleOwner, Observer {
             binding.bookDetail.text = it
-        })
+        })*/
 
 
 

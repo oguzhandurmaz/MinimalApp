@@ -1,9 +1,10 @@
-package com.example.minimaapp
+package com.example.minimaapp.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.minimaapp.Count
 
 @Dao
 interface CountDao {

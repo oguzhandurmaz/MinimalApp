@@ -4,18 +4,19 @@ import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.IllegalArgumentException
 
 class CountViewModel(application: Application): AndroidViewModel(application) {
     private var countRepository: CountRepository
 
-    private var _countDataSeven = MutableLiveData<List<Count>>()
     val countDataSeven: LiveData<List<Count>>
 
     init{
         val countDao = CountRoomDatabase.getDataBase(application).countDao()
         countRepository = CountRepository(countDao)
 
-        countDataSeven = countRepository.countSeven
+            countDataSeven = countRepository.countSeven
+
 
     }
 
