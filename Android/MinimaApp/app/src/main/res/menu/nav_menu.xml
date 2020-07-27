@@ -10,7 +10,7 @@
         android:title="Books"/>
 
     <item
-        android:id="@+id/my_books"
+        android:id="@+id/favoriteBooksFragment"
         android:title="Favourite Books"/>
     <item
         android:id="@+id/games"

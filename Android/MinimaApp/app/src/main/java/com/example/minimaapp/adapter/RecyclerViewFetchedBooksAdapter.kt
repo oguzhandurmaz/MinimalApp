@@ -5,10 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.minimaapp.Book
+import com.example.minimaapp.data.Book
 import com.example.minimaapp.IRecyclerOnClickListener
-import com.example.minimaapp.R
 import com.example.minimaapp.databinding.RecyclerviewFetchedbooksBinding
 
 class RecyclerViewFetchedBooksAdapter(
@@ -47,6 +45,7 @@ class RecyclerViewFetchedBooksAdapter(
           holder.binding.recyclerBookTitle.text = books[position].title
   */
         /*
+
 
 
           holder.binding.favorite.setOnCheckedChangeListener { _, isChecked ->

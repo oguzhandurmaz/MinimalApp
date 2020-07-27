@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/countFragment"
-        android:name="com.example.minimaapp.CountFragment"
+        android:name="com.example.minimaapp.ui.CountFragment"
         android:label="General Informations"
         tools:layout="@layout/fragment_count" />
     <fragment
         android:id="@+id/fetchedBooksFragment"
-        android:name="com.example.minimaapp.FetchedBooksFragment"
+        android:name="com.example.minimaapp.ui.FetchedBooksFragment"
         android:label="New Books - Last 25"
         tools:layout="@layout/fragment_fetched_books" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookDetailFragment"
-        android:name="com.example.minimaapp.BookDetailFragment"
+        android:name="com.example.minimaapp.ui.BookDetailFragment"
         android:label="Book Detail"
         tools:layout="@layout/fragment_book_detail" >
         <argument
@@ -36,5 +36,13 @@
         <argument
             android:name="bookDetailUrl"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteBooksFragment"
+        android:name="com.example.minimaapp.ui.FavoriteBooksFragment"
+        android:label="Favorite Books" >
+        <action
+            android:id="@+id/action_favoriteBooksFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
     </fragment>
 </navigation>

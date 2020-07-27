@@ -1,4 +1,4 @@
-package com.example.minimaapp
+package com.example.minimaapp.data.table
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.minimaapp.Count
+import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.databinding.RecyclerviewRegisterBinding
 
 class RecyclerViewRegisterAdapter :

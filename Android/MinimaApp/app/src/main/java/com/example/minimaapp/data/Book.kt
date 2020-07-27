@@ -1,4 +1,4 @@
-package com.example.minimaapp
+package com.example.minimaapp.data
 
 data class Book(
     val imgUrl: String,

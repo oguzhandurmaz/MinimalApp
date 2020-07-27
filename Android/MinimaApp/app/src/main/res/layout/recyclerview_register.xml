@@ -4,7 +4,7 @@
     <data>
         <variable
             name="count"
-            type="com.example.minimaapp.Count" />
+            type="com.example.minimaapp.data.table.Count" />
 
     </data>
 

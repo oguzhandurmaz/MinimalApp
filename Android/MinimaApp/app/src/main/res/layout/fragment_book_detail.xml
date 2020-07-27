@@ -8,15 +8,17 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.minimaapp.BookDetailViewModel" />
-
+            type="com.example.minimaapp.viewmodel.BookDetailViewModel" />
+        <variable
+            name="imageUrl"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        tools:context=".BookDetailFragment">
+        tools:context=".ui.BookDetailFragment">
         <ImageView
             android:id="@+id/image_book"
             android:layout_width="150dp"
@@ -24,6 +26,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            app:detailImageLoad="@{imageUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,24 +63,26 @@
             />
 
         <ScrollView
+            android:id="@+id/scrollView3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:fillViewport="true"
             android:layout_marginTop="8dp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toTopOf="@id/btn_add_favorite"
             app:layout_constraintTop_toBottomOf="@id/image_book">
+
             <TextView
                 android:id="@+id/book_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:text="@{viewModel.fetchedBookDetail}"
-                android:textSize="18dp"
                 android:background="@color/light_pink"
+                android:padding="8dp"
+                android:text="@{viewModel.fetchedBookDetail}"
+                android:textColor="@color/black"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toTopOf="@id/btn_add_favorite"
-                app:layout_constraintTop_toBottomOf="@id/image_book"/>
+                app:layout_constraintTop_toBottomOf="@id/image_book" />
 
         </ScrollView>
 
@@ -93,7 +98,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textColor="@color/white"
-            android:background="@drawable/button_blue_shape"
+            android:background="@drawable/button_add"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 

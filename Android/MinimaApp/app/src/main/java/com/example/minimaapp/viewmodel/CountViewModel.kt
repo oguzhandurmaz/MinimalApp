@@ -1,10 +1,11 @@
-package com.example.minimaapp
+package com.example.minimaapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
+import com.example.minimaapp.data.CountRoomDatabase
+import com.example.minimaapp.data.table.Count
+import com.example.minimaapp.repo.CountRepository
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
 
 class CountViewModel(application: Application): AndroidViewModel(application) {
     private var countRepository: CountRepository

@@ -1,20 +1,44 @@
-package com.example.minimaapp
+package com.example.minimaapp.repo
 
-import com.example.minimaapp.dao.BookDao
+import com.example.minimaapp.data.Book
+import com.example.minimaapp.data.dao.BookDao
+import com.example.minimaapp.data.table.BookTable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import java.io.IOException
+import java.lang.Exception
 import java.util.*
 
 class BookRepository(private val bookDao: BookDao) {
 
 
+    //Favorite Books Section
+    fun get() = bookDao.getAllBooks()
 
-    suspend fun insert(bookTable: BookTable) = bookDao.insert(bookTable)
+    suspend fun insert(bookTable: BookTable):Boolean{
+        return try{
+            bookDao.insert(bookTable)
+            true
+        }catch (e: Exception){
+            false
+        }
+    }
+
+    suspend fun delete(bookTable: BookTable): Boolean{
+        return try{
+            bookDao.delete(bookTable)
+            true
+        }catch (e: Exception){
+            false
+        }
+    }
 
 
+
+
+    //Fetched From 1000kitap.com Latest 25 Books
     suspend fun fetchBooks(): List<Book> {
         return withContext(Dispatchers.IO){
             try {
@@ -45,7 +69,14 @@ class BookRepository(private val bookDao: BookDao) {
                         .select("a")
                         .eq(0)
                         .text()
-                    bookList.add(Book(imgUrl, title, subTitle, bookDetailUrl))
+                    bookList.add(
+                        Book(
+                            imgUrl,
+                            title,
+                            subTitle,
+                            bookDetailUrl
+                        )
+                    )
                 }
 
                 return@withContext bookList

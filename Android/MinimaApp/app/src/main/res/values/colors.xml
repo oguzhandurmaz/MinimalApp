@@ -12,5 +12,6 @@
     <color name="purple">#6D597A</color>
     <color name="light_purple">#b6acbc</color>
     <color name="yellow">#F9DC5C</color>
+    <color name="gray">#bfbfbf</color>
 
 </resources>

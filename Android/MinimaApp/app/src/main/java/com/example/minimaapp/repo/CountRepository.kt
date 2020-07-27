@@ -1,10 +1,10 @@
-package com.example.minimaapp
+package com.example.minimaapp.repo
 
-import androidx.lifecycle.LiveData
-import com.example.minimaapp.dao.CountDao
+import com.example.minimaapp.data.Book
+import com.example.minimaapp.data.dao.CountDao
+import com.example.minimaapp.data.table.Count
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import org.jsoup.Jsoup
 import java.io.IOException
 import java.util.*
@@ -63,7 +63,14 @@ class CountRepository(private val countDao: CountDao) {
                      val elements = docDetail.select("div.oge.metin")
                          .eq(0)
                      val bookDetail = elements.text()*/
-                    bookList.add(Book(imgUrl, title, subTitle, bookDetailUrl))
+                    bookList.add(
+                        Book(
+                            imgUrl,
+                            title,
+                            subTitle,
+                            bookDetailUrl
+                        )
+                    )
                 }
 
                 return@withContext bookList

@@ -1,9 +1,10 @@
-package com.example.minimaapp
+package com.example.minimaapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import androidx.room.RoomDatabase
-import kotlinx.coroutines.Dispatchers
+import com.example.minimaapp.data.Book
+import com.example.minimaapp.data.CountRoomDatabase
+import com.example.minimaapp.repo.BookRepository
 import kotlinx.coroutines.launch
 
 class FetchedBooksViewModel(application: Application): AndroidViewModel(application) {

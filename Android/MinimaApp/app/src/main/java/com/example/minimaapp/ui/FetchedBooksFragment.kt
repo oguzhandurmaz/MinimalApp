@@ -1,4 +1,4 @@
-package com.example.minimaapp
+package com.example.minimaapp.ui
 
 
 import android.os.Bundle
@@ -10,14 +10,16 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
+import com.example.minimaapp.ui.FetchedBooksFragmentDirections
+import com.example.minimaapp.IRecyclerOnClickListener
 import com.example.minimaapp.adapter.RecyclerViewFetchedBooksAdapter
 import com.example.minimaapp.databinding.FragmentFetchedBooksBinding
+import com.example.minimaapp.viewmodel.FetchedBooksViewModel
 
 /**
  * A simple [Fragment] subclass.
  */
-class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener{
+class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
     override fun onClickListener(
         position: Int,
         url: String,
@@ -26,9 +28,10 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener{
         detailUrl: String
     ) {
         val action
-                = FetchedBooksFragmentDirections.actionFetchedBooksFragmentToBookDetailFragment(
-            url,title,author,detailUrl
-        )
+                =
+            FetchedBooksFragmentDirections.actionFetchedBooksFragmentToBookDetailFragment(
+                url, title, author, detailUrl
+            )
         findNavController().navigate(action)
     }
 

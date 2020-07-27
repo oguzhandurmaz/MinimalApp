@@ -4,8 +4,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.example.minimaapp.Book
-import com.example.minimaapp.Count
+import com.example.minimaapp.data.Book
+import com.example.minimaapp.data.table.BookTable
+import com.example.minimaapp.data.table.Count
+import com.example.minimaapp.R
 
 @BindingAdapter("recyclerBookTitle")
 fun TextView.setTitle(item: Book){
@@ -35,4 +37,28 @@ fun TextView.setCount(item: Count){
 @BindingAdapter("time")
 fun TextView.setTime(item: Count){
     text = item.time.toString()
+}
+@BindingAdapter("recyclerFavBookTitle")
+fun TextView.setTitle(item: BookTable){
+    text = item.title
+}
+@BindingAdapter("recyclerFavBookImage")
+fun ImageView.setImage(item: BookTable){
+    Glide.with(this)
+        .load(item.url)
+        .into(this)
+}
+
+@BindingAdapter("recyclerFavBookAuthor")
+fun TextView.setAuthor(item: BookTable){
+    text = item.author
+}
+
+//Detail Fragment Image
+@BindingAdapter("detailImageLoad")
+fun ImageView.setImage(url: String){
+    Glide.with(this)
+        .load(url)
+        .placeholder(R.drawable.ic_image)
+        .into(this)
 }
