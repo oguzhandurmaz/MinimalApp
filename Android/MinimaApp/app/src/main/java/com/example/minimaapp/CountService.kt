@@ -9,6 +9,8 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.minimaapp.utils.StaticVariables
+import com.example.minimaapp.utils.Utils.Companion.saveDate
+import com.example.minimaapp.utils.Utils.Companion.saveServiceState
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,7 +44,7 @@ class CountService : Service() {
             .setPriority(NotificationCompat.PRIORITY_LOW)
 
         startForeground(1, notification.build())
-        saveServiceState(true)
+        saveServiceState(this,true)
 
         //RegisterReceiver
         if (!isReceiverRegistered) {
@@ -58,6 +60,7 @@ class CountService : Service() {
             //Save Date
             StaticVariables.date =
                 SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+            saveDate(this,SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date()))
 
             isReceiverRegistered = true
         }
@@ -84,19 +87,18 @@ class CountService : Service() {
     override fun onDestroy() {
         super.onDestroy()
 
-        saveServiceState(false)
+        saveServiceState(this,false)
 
         if (isReceiverRegistered) {
             unregisterReceiver(countReceiver)
             isReceiverRegistered = false
         }
-        Log.d("Minimal", "Service: onDestory")
     }
 
-    private fun saveServiceState(state: Boolean) {
+    /*private fun saveServiceState(state: Boolean) {
         val shared = getSharedPreferences("minimal_app", Context.MODE_PRIVATE)
         val editor = shared.edit()
         editor.putBoolean("service_state", state)
         editor.apply()
-    }
+    }*/
 }

@@ -99,7 +99,7 @@ class Utils {
                         countRepository.insert(
                             Count(
                                 0,
-                                StaticVariables.date,
+                                getDate(context),
                                 getScreenOnCount(this@apply),
                                 getScreenOnTime(this@apply)
                             )
@@ -110,6 +110,19 @@ class Utils {
                 }
             }
 
+        }
+
+        fun saveDate(context: Context?,date: String){
+            context?.getSharedPreferences("minimal_app", Context.MODE_PRIVATE)?.apply {
+                edit()
+                    .putString("date", date)
+                    .apply()
+            }
+        }
+        fun getDate(context: Context?): String{
+            return context?.getSharedPreferences("minimal_app",Context.MODE_PRIVATE)?.run {
+                getString("date","01-01-1990")
+            }?: "01-01-1990"
         }
     }
 

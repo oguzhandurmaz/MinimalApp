@@ -5,13 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.databinding.adapters.CalendarViewBindingAdapter.setDate
 import com.example.minimaapp.utils.StaticVariables
 import com.example.minimaapp.utils.Utils
+import com.example.minimaapp.utils.Utils.Companion.getDate
 import com.example.minimaapp.utils.Utils.Companion.getScreenOnCount
 import com.example.minimaapp.utils.Utils.Companion.getScreenOnTime
 import com.example.minimaapp.utils.Utils.Companion.getServiceState
 import com.example.minimaapp.utils.Utils.Companion.resetValues
 import com.example.minimaapp.utils.Utils.Companion.saveAndResetValues
+import com.example.minimaapp.utils.Utils.Companion.saveDate
 import com.example.minimaapp.utils.Utils.Companion.saveScreenOnCount
 import com.example.minimaapp.utils.Utils.Companion.saveScreenOnTime
 import java.text.SimpleDateFormat
@@ -38,7 +41,7 @@ class CommonReceiver : BroadcastReceiver() {
                     //Service Durdurulmuşsa Çalıştırma
                     if (getServiceState(this)) {
                         //Kapatıldığı zamanla açıldığı zaman aynı ise kaldığı yerden devam et. Değilse baştan başla
-                        if (StaticVariables.date == SimpleDateFormat(
+                        if (getDate(context) == SimpleDateFormat(
                                 "dd-MM-yyyy",
                                 Locale.getDefault()
                             ).format(Date())
@@ -49,12 +52,16 @@ class CommonReceiver : BroadcastReceiver() {
                                 it.putExtra("count", getScreenOnCount(this))
                                 ContextCompat.startForegroundService(
                                     this,
-                                    Intent(this, CountService::class.java)
+                                    it
                                 )
                             }
                         } else {
                             //Verileri Kaydet ve Resetle - Yeni güne başla
                             saveAndResetValues(this)
+                            saveDate(context,SimpleDateFormat(
+                                "dd-MM-yyyy",
+                                Locale.getDefault()
+                            ).format(Date()))
                             StaticVariables.date = SimpleDateFormat(
                                 "dd-MM-yyyy",
                                 Locale.getDefault()
@@ -115,9 +122,11 @@ class CommonReceiver : BroadcastReceiver() {
                     context?.apply {
                         //save And Reset Values
                         saveAndResetValues(this)
+
+                        val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
                         //Tarihi Değiştir
-                        StaticVariables.date =
-                            SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+                        StaticVariables.date = date
+                        saveDate(context,date)
 
                     }
                 }

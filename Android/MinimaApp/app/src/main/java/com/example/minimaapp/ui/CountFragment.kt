@@ -1,30 +1,29 @@
 package com.example.minimaapp.ui
 
 
-import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.textservice.TextServicesManager
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.minimaapp.CountService
-import com.example.minimaapp.data.table.Count
-import com.example.minimaapp.viewmodel.CountViewModel
 import com.example.minimaapp.adapter.RecyclerViewRegisterAdapter
 import com.example.minimaapp.databinding.FragmentCountBinding
 import com.example.minimaapp.utils.StaticVariables
+import com.example.minimaapp.utils.Utils.Companion.getDate
 import com.example.minimaapp.utils.Utils.Companion.getScreenOnCount
 import com.example.minimaapp.utils.Utils.Companion.getScreenOnTime
 import com.example.minimaapp.utils.Utils.Companion.getServiceState
-import com.example.minimaapp.utils.Utils.Companion.resetValues
 import com.example.minimaapp.utils.Utils.Companion.saveAndResetValues
+import com.example.minimaapp.utils.Utils.Companion.saveDate
+import com.example.minimaapp.utils.Utils.Companion.saveServiceState
+import com.example.minimaapp.viewmodel.CountViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -58,18 +57,13 @@ class CountFragment : Fragment() {
 
         //Set Date
         StaticVariables.date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+        saveDate(
+            requireContext(),
+            SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+        )
 
-        //Set Count, Date, Time Values
-        val count = "Count\n${getScreenOnCount(context)}"
-        val time = "Time\n${getScreenOnTime(context)}"
-        val temp = StaticVariables.date.split("-")
-        val date = "Date\n${temp[0]}-${temp[1]}\n${temp[2]}"
-        binding.textCount.text = count
-        binding.textTime.text = time
-        binding.textDate.text = date
-
-
-
+        //Set Count, Date, Time Values to TextViews
+        setValuesToTextViews()
 
         viewModel.countDataSeven.observe(viewLifecycleOwner, Observer {
             it?.let { adapter.submitList(it) }
@@ -90,7 +84,10 @@ class CountFragment : Fragment() {
             isServiceRunning = getServiceState(requireContext())
 
             val intent = Intent(requireActivity(), CountService::class.java)
-            if (StaticVariables.date == SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(
+            if (getDate(requireContext()) == SimpleDateFormat(
+                    "dd-MM-yyyy",
+                    Locale.getDefault()
+                ).format(
                     Date()
                 )
             ) {
@@ -98,6 +95,14 @@ class CountFragment : Fragment() {
             } else {
                 // Önceki verileri kaydedip sıfırla - Bir sonraki güne başla
                 saveAndResetValues(requireContext())
+                //Save Date
+                saveDate(
+                    requireContext(), SimpleDateFormat(
+                        "dd-MM-yyyy",
+                        Locale.getDefault()
+                    ).format(Date())
+                )
+
                 StaticVariables.date == SimpleDateFormat(
                     "dd-MM-yyyy",
                     Locale.getDefault()
@@ -122,7 +127,7 @@ class CountFragment : Fragment() {
     fun setValuesToTextViews() {
         val count = "Count\n${getScreenOnCount(context)}"
         val time = "Time\n${getScreenOnTime(context)}"
-        val temp = StaticVariables.date.split("-")
+        val temp = getDate(requireContext()).split("-")
         val date = "Date\n${temp[0]}-${temp[1]}\n${temp[2]}"
         binding.textCount.text = count
         binding.textTime.text = time
