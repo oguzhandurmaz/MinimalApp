@@ -1,6 +1,7 @@
 package com.example.minimaapp.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.minimaapp.data.CountRoomDatabase
 import com.example.minimaapp.data.table.BookTable
@@ -23,7 +24,9 @@ class FavoriteBooksViewModel(application: Application): AndroidViewModel(applica
 
     fun delete(position: Int){
         viewModelScope.launch {
+            Log.d("Minimal","VM Position: $position - favBooks size: ${favBooks.value?.size}")
             favBooks.value?.get(position)?.let {
+
                 bookRepository.delete(it)
             }
         }

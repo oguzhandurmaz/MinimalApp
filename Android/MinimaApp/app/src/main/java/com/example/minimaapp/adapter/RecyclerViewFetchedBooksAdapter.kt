@@ -41,6 +41,7 @@ class RecyclerViewFetchedBooksAdapter(
         holder.binding.fetchedBooks = getItem(position)
         holder.binding.executePendingBindings()
 
+
         /*  holder.binding.recyclerBookAuthor.text = books[position].author
           holder.binding.recyclerBookTitle.text = books[position].title
   */

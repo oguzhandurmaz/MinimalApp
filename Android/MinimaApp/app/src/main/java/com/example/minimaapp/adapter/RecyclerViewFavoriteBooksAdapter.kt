@@ -1,6 +1,7 @@
 package com.example.minimaapp.adapter
 
 import android.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +12,23 @@ import com.example.minimaapp.IRecyclerOnClickListener
 import com.example.minimaapp.databinding.RecyclerviewFavoritebooksBinding
 
 class RecyclerViewFavoriteBooksAdapter(private val callback: IRecyclerOnClickListener) :
-    ListAdapter<BookTable, RecyclerViewFavoriteBooksAdapter.viewHolder>(FavBookDiffCallback()) {
+     RecyclerView.Adapter<RecyclerViewFavoriteBooksAdapter.viewHolder>(){
+
+    private var data = emptyList<BookTable>()
+
+
+    override fun getItemCount(): Int {
+        return data.size
+    }
+
+    fun setData(data: List<BookTable>){
+        this.data = data
+        notifyDataSetChanged()
+    }
+
+
+
+    //ListAdapter<BookTable, RecyclerViewFavoriteBooksAdapter.viewHolder>(FavBookDiffCallback())
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -28,7 +45,7 @@ class RecyclerViewFavoriteBooksAdapter(private val callback: IRecyclerOnClickLis
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         holder.apply {
 
-            binding.favoriteBooks = getItem(position)
+            binding.favoriteBooks = data[position]
             binding.executePendingBindings()
           /*  Glide.with(holder.binding.recyclerFavBookImage)
                 .load(getItem(position).url)
@@ -44,7 +61,8 @@ class RecyclerViewFavoriteBooksAdapter(private val callback: IRecyclerOnClickLis
                 alertDialog.setMessage("You are deleting Favorite Book. Are you sure?")
                 alertDialog.setPositiveButton("Yes"
                 ) { _, _ ->
-                   callback.onDeleteListener(position)
+                    Log.d("Minimal","Adapter Position: $position")
+                    callback.onDeleteListener(position)
                 }
                 alertDialog.setNegativeButton("No"){
                     dialog, _ ->
@@ -56,7 +74,7 @@ class RecyclerViewFavoriteBooksAdapter(private val callback: IRecyclerOnClickLis
         }
 
         holder.itemView.setOnClickListener {
-            getItem(position).apply {
+            data[position].apply {
                 callback.onClickListener(position, url, title, author, detail)
             }
         }

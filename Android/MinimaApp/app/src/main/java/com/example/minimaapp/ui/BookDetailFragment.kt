@@ -2,10 +2,13 @@ package com.example.minimaapp.ui
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.minimaapp.ui.BookDetailFragmentArgs
@@ -66,8 +69,9 @@ class BookDetailFragment : Fragment() {
         binding.bookTitle.text = title
         binding.bookAuthor.text = author
 
-
-
+        viewModel.fetchedBookDetail.observe(viewLifecycleOwner, Observer {
+            binding.btnAddFavorite.isEnabled = true
+        })
 
 
         viewModel.favBooks.observe(viewLifecycleOwner, Observer {
@@ -86,7 +90,7 @@ class BookDetailFragment : Fragment() {
                 binding.btnAddFavorite.isEnabled = false
                 binding.btnAddFavorite.text = "Added Favorites"
             }else{
-
+                Toast.makeText(requireContext(),"Couldnt Add to Favorites",Toast.LENGTH_SHORT).show()
             }
         })
 

@@ -62,7 +62,9 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
         binding.recyclerFavBooks.adapter = adapter
 
         viewModel.favBooks.observe(viewLifecycleOwner, Observer {
-            it?.let { adapter.submitList(it) }
+            it?.let {   //adapter.submitList(it.toMutableList())
+                adapter.setData(it)
+            }
         })
 
         // Inflate the layout for this fragment

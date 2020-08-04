@@ -95,6 +95,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Add Favorite"
+            android:enabled="false"
             android:gravity="center"
             android:textSize="20sp"
             android:textColor="@color/white"
