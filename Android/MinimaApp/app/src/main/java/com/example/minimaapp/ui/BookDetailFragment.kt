@@ -1,22 +1,33 @@
 package com.example.minimaapp.ui
 
 
+import android.animation.ObjectAnimator
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.transition.Transition
+import android.transition.TransitionInflater
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.animation.doOnEnd
+import androidx.core.widget.NestedScrollView
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.minimaapp.ui.BookDetailFragmentArgs
 import com.example.minimaapp.viewmodel.BookDetailViewModel
 import com.example.minimaapp.viewmodel.BookDetailViewModel.*
 import com.example.minimaapp.data.table.BookTable
 import com.example.minimaapp.MainActivity
 import com.example.minimaapp.databinding.FragmentBookDetailBinding
+import com.google.android.material.appbar.AppBarLayout
+import kotlin.math.abs
 
 /**
  * A simple [Fragment] subclass.
@@ -30,11 +41,26 @@ class BookDetailFragment : Fragment() {
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var viewModelFactory: BookDetailViewModelFactory
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        sharedElementEnterTransition =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val args = BookDetailFragmentArgs.fromBundle(requireArguments())
+
+        //binding.imageUrl = args.imageUrl
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         // Inflate the layout for this fragment
         binding = FragmentBookDetailBinding.inflate(inflater)
 
@@ -45,6 +71,7 @@ class BookDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+
         val args = BookDetailFragmentArgs.fromBundle(requireArguments())
         val imageUrl = args.imageUrl
         val title = args.title
@@ -54,43 +81,63 @@ class BookDetailFragment : Fragment() {
         val actionBar = (activity as MainActivity).supportActionBar
         actionBar?.title = title
 
-        if(detailUrl.startsWith("https://")){
+        actionBar?.setShowHideAnimationEnabled(false)
+        actionBar?.hide()
+
+        binding.toolbar.title = title
+        binding.tempAuthor.text = author
+
+
+        binding.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            binding.btnAddFavorite.clearAnimation()
+            if( ((appBarLayout.totalScrollRange + verticalOffset).toFloat() / appBarLayout.totalScrollRange) == 0.0f)
+            {
+               val a =  ObjectAnimator.ofFloat(binding.btnAddFavorite,"alpha",0f).apply {
+                    duration = 300
+                    start()
+                }
+                a.doOnEnd { binding.btnAddFavorite.visibility = View.GONE }
+            }else{
+                val b = ObjectAnimator.ofFloat(binding.btnAddFavorite,"alpha",1f).apply {
+                    duration = 300
+                    start()
+                }
+                b.doOnEnd { binding.btnAddFavorite.visibility = View.VISIBLE }
+                //binding.btnAddFavorite.visibility = View.VISIBLE
+            }
+        })
+
+        if (detailUrl.startsWith("https://")) {
             viewModel.getBookDetail(detailUrl)
-        }else{
+        } else {
             viewModel.setBookDetail(detailUrl)
         }
 
-      /*  Glide.with(requireContext())
-            .load(imageUrl)
-            .placeholder(R.drawable.ic_image)
-            .into(binding.imageBook)*/
         binding.imageUrl = imageUrl
-
-        binding.bookTitle.text = title
-        binding.bookAuthor.text = author
-
         viewModel.fetchedBookDetail.observe(viewLifecycleOwner, Observer {
-            binding.btnAddFavorite.isEnabled = true
+            //binding.btnAddFavorite.isEnabled = true
         })
+
 
 
         viewModel.favBooks.observe(viewLifecycleOwner, Observer {
             it.forEach {
-               if(it.title == title && it.author == author){
-                   binding.btnAddFavorite.isEnabled = false
-                   binding.btnAddFavorite.text = "Added Favorites"
-                   return@forEach
-               }
+                if (it.title == title && it.author == author) {
+                    binding.btnAddFavorite.isEnabled = false
+                    binding.btnAddFavorite.text = "Added Favorites"
+                    return@forEach
+                }
             }
 
         })
 
         viewModel.success.observe(viewLifecycleOwner, Observer {
-            if(it){
+            if (it) {
                 binding.btnAddFavorite.isEnabled = false
                 binding.btnAddFavorite.text = "Added Favorites"
-            }else{
-                Toast.makeText(requireContext(),"Couldnt Add to Favorites",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Couldnt Add to Favorites", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
 
@@ -105,13 +152,6 @@ class BookDetailFragment : Fragment() {
                 )
             )
         }
-
-
-
-
-
-
-
 
         return binding.root
     }

@@ -66,7 +66,8 @@ class RecyclerViewFetchedBooksAdapter(
                 getItem(position).imgUrl,
                 getItem(position).title,
                 getItem(position).author,
-                getItem(position).bookDetailUrl
+                getItem(position).bookDetailUrl,
+                holder.binding.recyclerBookImage
             )
         }
 

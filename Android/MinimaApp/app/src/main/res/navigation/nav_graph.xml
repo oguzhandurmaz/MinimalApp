@@ -17,7 +17,8 @@
         tools:layout="@layout/fragment_fetched_books" >
         <action
             android:id="@+id/action_fetchedBooksFragment_to_bookDetailFragment"
-            app:destination="@id/bookDetailFragment" />
+            app:destination="@id/bookDetailFragment"
+            app:enterAnim="@anim/from_left" />
     </fragment>
     <fragment
         android:id="@+id/bookDetailFragment"
@@ -43,6 +44,10 @@
         android:label="Favorite Books" >
         <action
             android:id="@+id/action_favoriteBooksFragment_to_bookDetailFragment"
-            app:destination="@id/bookDetailFragment" />
+            app:destination="@id/bookDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
 </navigation>

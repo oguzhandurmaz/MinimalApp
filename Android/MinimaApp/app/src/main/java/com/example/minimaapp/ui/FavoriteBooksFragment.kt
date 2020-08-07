@@ -6,17 +6,23 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.minimaapp.IRecyclerOnClickListener
+import com.example.minimaapp.MainActivity
 import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewFavoriteBooksAdapter
 import com.example.minimaapp.databinding.FragmentFavoriteBooksBinding
 import com.example.minimaapp.viewmodel.FavoriteBooksViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.fragment_book_detail.*
+import kotlinx.android.synthetic.main.recyclerview_favoritebooks.*
 import java.util.*
 
 /**
@@ -28,8 +34,14 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
         url: String,
         title: String,
         author: String,
-        detailUrl: String
+        detailUrl: String,
+        view: ImageView
     ) {
+
+        val extras = FragmentNavigatorExtras(
+            view to "image_view"
+        )
+
         val action =
             FavoriteBooksFragmentDirections.actionFavoriteBooksFragmentToBookDetailFragment(
                 url,
@@ -37,7 +49,7 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
                 author,
                 detailUrl
             )
-        findNavController().navigate(action)
+        findNavController().navigate(action,extras)
     }
 
     override fun onDeleteListener(position: Int) {
@@ -68,8 +80,18 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
 
         setHasOptionsMenu(true)
 
+
+
+
         adapter = RecyclerViewFavoriteBooksAdapter(this)
         binding.recyclerFavBooks.adapter = adapter
+        binding.recyclerFavBooks.apply {
+            postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
+        }
 
 
         viewModel.favBooks.observe(viewLifecycleOwner, Observer {
@@ -134,6 +156,14 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
 
         })
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val actionBar = (activity as MainActivity).supportActionBar
+
+        actionBar?.setShowHideAnimationEnabled(false)
+        actionBar?.show()
     }
 
 

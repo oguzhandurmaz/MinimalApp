@@ -26,7 +26,7 @@ class CountService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val count = intent?.getIntExtra("count",0) ?: 0
-
+        val time = intent?.getIntExtra("time",0) ?: 0
 
             createNotificationChannel()
 
@@ -41,6 +41,9 @@ class CountService : Service() {
             .setContentText("Screen On Count $count")
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.drawable.ic_image)
+            .setStyle(NotificationCompat.InboxStyle()
+                .addLine("Screen On Count $count")
+                .addLine("Longest Screen Open Time: 10"))
             .setPriority(NotificationCompat.PRIORITY_LOW)
 
         startForeground(1, notification.build())

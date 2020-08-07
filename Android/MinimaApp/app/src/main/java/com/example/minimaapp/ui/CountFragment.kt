@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.minimaapp.CountService
+import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewRegisterAdapter
 import com.example.minimaapp.databinding.FragmentCountBinding
 import com.example.minimaapp.utils.StaticVariables
@@ -78,6 +79,7 @@ class CountFragment : Fragment() {
         } else {
             binding.btnStart.text = "Start"
         }
+        
 
         binding.btnStart.setOnClickListener {
             // viewModel.insert(Count(0, "20-20-1010", 10, 20))

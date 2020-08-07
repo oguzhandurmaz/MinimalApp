@@ -4,6 +4,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.minimaapp.data.Book
 import com.example.minimaapp.data.table.BookTable
 import com.example.minimaapp.data.table.Count
@@ -59,6 +60,6 @@ fun TextView.setAuthor(item: BookTable){
 fun ImageView.setImage(url: String){
     Glide.with(this)
         .load(url)
-        .placeholder(R.drawable.ic_image)
+        //.placeholder(R.drawable.ic_image)
         .into(this)
 }

@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +48,10 @@ class RecyclerViewFavoriteBooksAdapter(private val callback: IRecyclerOnClickLis
 
             binding.favoriteBooks = data[position]
             binding.executePendingBindings()
+
+            ViewCompat.setTransitionName(binding.recyclerFavBookImage,data[position].title)
+
+
           /*  Glide.with(holder.binding.recyclerFavBookImage)
                 .load(getItem(position).url)
                 .into(holder.binding.recyclerFavBookImage)
@@ -75,7 +80,7 @@ class RecyclerViewFavoriteBooksAdapter(private val callback: IRecyclerOnClickLis
 
         holder.itemView.setOnClickListener {
             data[position].apply {
-                callback.onClickListener(position, url, title, author, detail)
+                callback.onClickListener(position, url, title, author, detail,holder.binding.recyclerFavBookImage)
             }
         }
 
@@ -83,7 +88,6 @@ class RecyclerViewFavoriteBooksAdapter(private val callback: IRecyclerOnClickLis
 
 
     class viewHolder(val binding: RecyclerviewFavoritebooksBinding) : RecyclerView.ViewHolder(binding.root) {
-
     }
 
 
