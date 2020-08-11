@@ -41,6 +41,9 @@ class BookDetailFragment : Fragment() {
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var viewModelFactory: BookDetailViewModelFactory
 
+
+    private var isInDb = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -87,7 +90,12 @@ class BookDetailFragment : Fragment() {
         binding.toolbar.title = title
         binding.tempAuthor.text = author
 
+        binding.toolbarBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
+
+        //Collapsing Bar kapanınca Add Favorite göster açılınca gizle.
         binding.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             binding.btnAddFavorite.clearAnimation()
             if( ((appBarLayout.totalScrollRange + verticalOffset).toFloat() / appBarLayout.totalScrollRange) == 0.0f)
@@ -103,7 +111,6 @@ class BookDetailFragment : Fragment() {
                     start()
                 }
                 b.doOnEnd { binding.btnAddFavorite.visibility = View.VISIBLE }
-                //binding.btnAddFavorite.visibility = View.VISIBLE
             }
         })
 
@@ -115,7 +122,7 @@ class BookDetailFragment : Fragment() {
 
         binding.imageUrl = imageUrl
         viewModel.fetchedBookDetail.observe(viewLifecycleOwner, Observer {
-            //binding.btnAddFavorite.isEnabled = true
+            binding.btnAddFavorite.isEnabled = isInDb
         })
 
 
@@ -123,6 +130,7 @@ class BookDetailFragment : Fragment() {
         viewModel.favBooks.observe(viewLifecycleOwner, Observer {
             it.forEach {
                 if (it.title == title && it.author == author) {
+                    isInDb = true
                     binding.btnAddFavorite.isEnabled = false
                     binding.btnAddFavorite.text = "Added Favorites"
                     return@forEach

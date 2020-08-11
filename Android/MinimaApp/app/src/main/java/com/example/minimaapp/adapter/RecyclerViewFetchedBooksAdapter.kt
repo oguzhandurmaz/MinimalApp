@@ -2,9 +2,11 @@ package com.example.minimaapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.request.transition.ViewTransition
 import com.example.minimaapp.data.Book
 import com.example.minimaapp.IRecyclerOnClickListener
 import com.example.minimaapp.databinding.RecyclerviewFetchedbooksBinding
@@ -40,6 +42,8 @@ class RecyclerViewFetchedBooksAdapter(
 
         holder.binding.fetchedBooks = getItem(position)
         holder.binding.executePendingBindings()
+
+        ViewCompat.setTransitionName(holder.binding.recyclerBookImage,getItem(position).title)
 
 
         /*  holder.binding.recyclerBookAuthor.text = books[position].author

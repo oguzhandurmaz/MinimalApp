@@ -10,9 +10,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.minimaapp.ui.FetchedBooksFragmentDirections
 import com.example.minimaapp.IRecyclerOnClickListener
+import com.example.minimaapp.MainActivity
 import com.example.minimaapp.adapter.RecyclerViewFetchedBooksAdapter
 import com.example.minimaapp.databinding.FragmentFetchedBooksBinding
 import com.example.minimaapp.viewmodel.FetchedBooksViewModel
@@ -29,12 +31,16 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
         detailUrl: String,
         view: ImageView
     ) {
+
+        val extras = FragmentNavigatorExtras(
+            view to "image_view"
+        )
         val action
                 =
             FetchedBooksFragmentDirections.actionFetchedBooksFragmentToBookDetailFragment(
                 url, title, author, detailUrl
             )
-        findNavController().navigate(action)
+        findNavController().navigate(action,extras)
     }
 
     private lateinit var binding: FragmentFetchedBooksBinding
@@ -58,6 +64,13 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
 
         val adapter = RecyclerViewFetchedBooksAdapter(this)
         binding.recyclerBooks.adapter = adapter
+        binding.recyclerBooks.apply {
+            postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
+        }
 
         fetchBooks()
 
@@ -79,6 +92,14 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
         binding.swipeRefresh.isEnabled = true
         binding.swipeRefresh.isRefreshing = true
         viewModel.getBooks()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val actionBar = (activity as MainActivity).supportActionBar
+
+        actionBar?.setShowHideAnimationEnabled(false)
+        actionBar?.show()
     }
 
 

@@ -6,6 +6,10 @@
         android:title="Count"/>
 
     <item
+        android:id="@+id/graphicsFragment"
+        android:title="Graphics"/>
+
+    <item
         android:id="@+id/fetchedBooksFragment"
         android:title="Books"/>
 
