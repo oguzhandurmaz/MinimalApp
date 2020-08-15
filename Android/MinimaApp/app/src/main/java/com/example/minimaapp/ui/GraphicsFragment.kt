@@ -2,7 +2,6 @@ package com.example.minimaapp.ui
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +13,12 @@ import com.example.minimaapp.R
 import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.databinding.FragmentGraphicsBinding
 import com.example.minimaapp.viewmodel.GraphicsFragmentViewModel
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 /**
  * A simple [Fragment] subclass.
@@ -43,7 +44,7 @@ class GraphicsFragment : Fragment() {
         viewModel.countDataSeven.observe(viewLifecycleOwner, Observer {data ->
             data?.let {
                 setCountChart(data)
-                setTimechart(data)
+                setTimeChart(data)
             }
         })
 
@@ -61,22 +62,15 @@ class GraphicsFragment : Fragment() {
     private fun initTimeChart() {
         val axLeft = binding.timeBarChart.axisLeft
         val axRight = binding.timeBarChart.axisRight
-
+        val aXis = binding.timeBarChart.xAxis
         axLeft.isEnabled = false
         axRight.isEnabled = false
-        /*axLeft.setDrawGridLines(false)
-        axLeft.setDrawLabels(false)
-
-        axRight.setDrawGridLines(false)
-        axRight.setDrawLabels(false)
-*/
-        val aXis = binding.timeBarChart.xAxis
+        aXis.setDrawGridLines(false)
         aXis.axisLineColor = android.R.color.transparent
         aXis.textColor = ContextCompat.getColor(requireContext(),R.color.blue)
-        aXis.setDrawGridLines(false)
         aXis.position = XAxis.XAxisPosition.BOTTOM
 
-        binding.timeBarChart.setMaxVisibleValueCount(7)
+
         binding.timeBarChart.description.isEnabled = false
         binding.timeBarChart.setScaleEnabled(false)
     }
@@ -84,23 +78,15 @@ class GraphicsFragment : Fragment() {
     private fun initCountChart() {
         val axLeft = binding.countBarChart.axisLeft
         val axRight = binding.countBarChart.axisRight
-
-        axLeft.isEnabled = false
-        axRight.isEnabled = false
-        /*axLeft.setDrawGridLines(false)
-        axLeft.setDrawLabels(false)
-
-        axRight.setDrawGridLines(false)
-        axRight.setDrawLabels(false)*/
-
         val aXis = binding.countBarChart.xAxis
+        axLeft.isEnabled = false
+        axRight.isEnabled =false
+        aXis.setDrawGridLines(false)
         aXis.axisLineColor = android.R.color.transparent
         aXis.textColor = ContextCompat.getColor(requireContext(),R.color.purple)
-        aXis.setDrawGridLines(false)
         aXis.position = XAxis.XAxisPosition.BOTTOM
 
 
-        binding.countBarChart.setMaxVisibleValueCount(7)
         binding.countBarChart.description.isEnabled = false
         binding.countBarChart.setScaleEnabled(false)
 
@@ -120,13 +106,20 @@ class GraphicsFragment : Fragment() {
         val barDataSet = BarDataSet(entries,"Counts")
         barDataSet.color = ContextCompat.getColor(requireContext(),R.color.purple)
         val barData = BarData(barDataSet)
+        //Bar üstündeki değerleri 0.0 dan 0 yapmak için.
+        barData.setValueFormatter(ValueFormatter())
+
+        //X axise tarih değerleri vermek için.
+        binding.countBarChart.xAxis.valueFormatter = AxisValuesFormatter()
 
         binding.countBarChart.isDragEnabled = false
         binding.countBarChart.data = barData
+
+        binding.countBarChart.animateY(700)
         binding.countBarChart.invalidate()
 
     }
-    private fun setTimechart(data: List<Count>){
+    private fun setTimeChart(data: List<Count>){
         val entries = ArrayList<BarEntry>()
         for(i in data.indices){
             entries.add(BarEntry(i.toFloat(),data[i].time.toFloat()))
@@ -140,10 +133,32 @@ class GraphicsFragment : Fragment() {
         val barDataSet = BarDataSet(entries,"Time")
         barDataSet.color = ContextCompat.getColor(requireContext(),R.color.blue)
         val barData = BarData(barDataSet)
+        //Bar üstündeki değerleri 0.0 dan 0 yapmak için.
+        barData.setValueFormatter(ValueFormatter())
+
+        //X axise tarih değerleri vermek için.
+        binding.timeBarChart.xAxis.valueFormatter = AxisValuesFormatter()
 
         binding.timeBarChart.isDragEnabled = false
         binding.timeBarChart.data = barData
+
+        binding.timeBarChart.animateY(700)
         binding.timeBarChart.invalidate()
+    }
+
+    private inner class ValueFormatter: IndexAxisValueFormatter(){
+        override fun getFormattedValue(value: Float): String {
+            return value.toInt().toString()
+        }
+    }
+    private inner class AxisValuesFormatter: IndexAxisValueFormatter(){
+        override fun getFormattedValue(value: Float): String {
+            if(viewModel.countDataSeven.value?.size!! - 1 < value.toInt()){
+                return "0-0"
+            }
+            val date = viewModel.countDataSeven.value?.get(value.toInt())?.date?.split("-")
+            return "${date?.get(0)}-${date?.get(1)}"
+        }
     }
 
 

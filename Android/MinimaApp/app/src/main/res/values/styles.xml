@@ -13,6 +13,8 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/light_purple</item>
         <item name="colorAccent">@color/purple</item>
+        <item name="actionMenuTextColor">@color/blue</item>
+        <item name="android:actionMenuTextColor">@color/blue</item>
     </style>
 
 </resources>

@@ -104,10 +104,18 @@ class BookDetailFragment : Fragment() {
                     duration = 300
                     start()
                 }
+                ObjectAnimator.ofFloat(binding.btnAddFavorite,"translationY",60f).apply {
+                    duration =250
+                    start()
+                }
                 a.doOnEnd { binding.btnAddFavorite.visibility = View.GONE }
             }else{
                 val b = ObjectAnimator.ofFloat(binding.btnAddFavorite,"alpha",1f).apply {
                     duration = 300
+                    start()
+                }
+                ObjectAnimator.ofFloat(binding.btnAddFavorite,"translationY",0f).apply {
+                    duration = 250
                     start()
                 }
                 b.doOnEnd { binding.btnAddFavorite.visibility = View.VISIBLE }
@@ -121,9 +129,9 @@ class BookDetailFragment : Fragment() {
         }
 
         binding.imageUrl = imageUrl
-        viewModel.fetchedBookDetail.observe(viewLifecycleOwner, Observer {
+        /*viewModel.fetchedBookDetail.observe(viewLifecycleOwner, Observer {
             binding.btnAddFavorite.isEnabled = isInDb
-        })
+        })*/
 
 
 

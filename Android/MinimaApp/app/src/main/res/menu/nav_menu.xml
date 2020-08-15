@@ -2,8 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/count"
-        android:title="Count"/>
+        android:id="@+id/countFragment"
+        android:title="Count"
+        />
 
     <item
         android:id="@+id/graphicsFragment"
