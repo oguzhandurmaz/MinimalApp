@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View.LAYOUT_DIRECTION_RTL
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val navController = findNavController(R.id.host_fragment)
 
+        /*
         val config = applicationContext.resources.configuration
         val layoutDirection = config.layoutDirection
         val isLayoutRtl = layoutDirection == LAYOUT_DIRECTION_RTL
@@ -31,7 +33,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer_layout.closeDrawer(Gravity.LEFT)
         }else{
             drawer_layout.closeDrawer(Gravity.RIGHT)
-        }
+        }*/
+
+        drawer_layout.closeDrawer(GravityCompat.START)
 
         return NavigationUI.onNavDestinationSelected(item,navController)
     }
@@ -49,7 +53,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
 
         NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
-
+        NavigationUI.setupWithNavController(nav_view,navController)
         nav_view.setNavigationItemSelectedListener(this)
 
 

@@ -52,7 +52,6 @@
                         android:id="@+id/temp_author"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Kitap Yazarının Adı"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:maxLines="2"
@@ -64,23 +63,13 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:popupTheme="@style/Theme.AppCompat.Light"
-                    app:title="Collapsing"
+                    app:navigationIcon="@drawable/ic_arrow_back"
                     app:layout_collapseMode="pin">
-
-                    <ImageButton
-                        android:id="@+id/toolbar_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_arrow_back"
-                        />
 
                 </androidx.appcompat.widget.Toolbar>
 

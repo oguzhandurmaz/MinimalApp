@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_pink"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="Satranç, iki oyuncu arasında satranç tahtası ve taşları ile oynanan bir masa oyunu. Dünya çapında turnuvaları düzenlenir ve bir spor dalı olarak kabul edilir.[1] Bu oyun satranç tahtası denilen 8×8'lik kare bir alan üzerinde 32 adet satranç taşıyla oynanır. Toplam 64 karenin yarısı siyah, yarısı beyaz renklerden oluşur. Taraflar beyaz ve siyah renkli taşları alırlar, her oyuncunun bir seferde bir hamle yapmasıyla oyun gelişir. Oyunun başında beyaz ve siyahların 16 taşı bulunur. Bunlar bir şah, bir vezir, iki kale, iki fil, iki at ve sekiz piyondan oluşur. Oyunun amacı karşı tarafın şahını mat etmektir."/>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -28,6 +28,8 @@ class CommonReceiver : BroadcastReceiver() {
     private var minOn = 0
     private var secOn = 0
 
+    private var screeOnTime: Long = 0L
+
     private var isFirstScreenOn = false
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -76,9 +78,11 @@ class CommonReceiver : BroadcastReceiver() {
                 }
             }
             Intent.ACTION_SCREEN_ON -> {
-                hourOn = calendar.get(Calendar.HOUR_OF_DAY)
+                /*hourOn = calendar.get(Calendar.HOUR_OF_DAY)
                 minOn = calendar.get(Calendar.MINUTE)
-                secOn = calendar.get(Calendar.SECOND)
+                secOn = calendar.get(Calendar.SECOND)*/
+
+                screeOnTime = System.currentTimeMillis()
 
                 saveScreenOnCount(context, getScreenOnCount(context) + 1)
 
@@ -93,21 +97,25 @@ class CommonReceiver : BroadcastReceiver() {
 
             }
             Intent.ACTION_SCREEN_OFF -> {
-                val hourOff = calendar.get(Calendar.HOUR_OF_DAY)
+                /*val hourOff = calendar.get(Calendar.HOUR_OF_DAY)
                 val minOff = calendar.get(Calendar.MINUTE)
                 val secOff = calendar.get(Calendar.SECOND)
+*/
+                val screenOffTime = System.currentTimeMillis()
 
-                Log.d("Minimal","hourOn: $hourOn,minOn: $minOn, secOn: $secOn\nhourOff: $hourOff,minOff: $minOff, secOff: $secOff")
+                //Log.d("Minimal","hourOn: $hourOn,minOn: $minOn, secOn: $secOn\nhourOff: $hourOff,minOff: $minOff, secOff: $secOff")
 
                 if (isFirstScreenOn) {
-                    val screenOnTime =
-                        Utils.getDifferencesOfTime(hourOn, minOn, secOn, hourOff, minOff, secOff)
+                    /*val timeDiff =
+                        Utils.getDifferencesOfTime(hourOn, minOn, secOn, hourOff, minOff, secOff)*/
+                    val timeDiff = Utils.getDifferences(screeOnTime,screenOffTime)
+                    Log.d("Minimal","Time Diff $timeDiff")
 
                     //En uzun açık kalma süresi bir öncekinden büyükse kaydet.
                     context.apply {
-                        if (screenOnTime > getScreenOnTime(this)) {
-                            saveScreenOnTime(this, screenOnTime)
-                            StaticVariables.time = screenOnTime
+                        if (timeDiff > getScreenOnTime(this)) {
+                            saveScreenOnTime(this, timeDiff)
+                            StaticVariables.time = timeDiff
                         }
                     }
 
@@ -118,6 +126,8 @@ class CommonReceiver : BroadcastReceiver() {
             Intent.ACTION_TIME_TICK -> {
                 //Saat 00.00 ise bir sonraki gün ise
                 if (calendar.get(Calendar.HOUR_OF_DAY).toString() == "0" && calendar.get(Calendar.MINUTE).toString() == "0") {
+
+                    //isFirstScreenOn = false
 
                     context?.apply {
                         //save And Reset Values

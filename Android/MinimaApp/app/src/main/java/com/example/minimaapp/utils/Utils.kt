@@ -13,16 +13,11 @@ import kotlin.math.abs
 class Utils {
     companion object {
 
-        //Return Differences in Second Type
-        fun getDifferencesOfTime(
-            hour1: Int,
-            min1: Int,
-            sec1: Int,
-            hour2: Int,
-            min2: Int,
-            sec2: Int
-        ): Int {
-            return abs((hour1 * 360 + min1 * 60 + sec1) - (hour2 * 360 + min2 * 60 + sec2))
+        fun getDifferences(screenOn: Long,screenOff: Long): Int{
+            /*
+                Return second.
+             */
+            return ((screenOff-screenOn)/1000).toInt()
 
         }
 
@@ -101,7 +96,7 @@ class Utils {
                                 0,
                                 getDate(context),
                                 getScreenOnCount(this@apply),
-                                getScreenOnTime(this@apply)
+                                getScreenOnTime(this@apply).toInt()
                             )
                         )
                     }

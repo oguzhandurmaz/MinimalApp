@@ -1,5 +1,6 @@
 package com.example.minimaapp
 
+import com.example.minimaapp.utils.Utils
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -12,6 +13,8 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
+        val result = Utils.getDifferences(60000,120000)
+        println(result)
         assertEquals(4, 2 + 2)
     }
 }

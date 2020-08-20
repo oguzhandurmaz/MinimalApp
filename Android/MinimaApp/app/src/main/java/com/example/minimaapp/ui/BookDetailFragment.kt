@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.core.animation.doOnEnd
 import androidx.core.widget.NestedScrollView
 import androidx.core.widget.doAfterTextChanged
@@ -40,6 +41,8 @@ class BookDetailFragment : Fragment() {
     //ViewModel
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var viewModelFactory: BookDetailViewModelFactory
+
+    private var actionBar: ActionBar? = null
 
 
     private var isInDb = false
@@ -74,6 +77,11 @@ class BookDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        actionBar = (activity as MainActivity).supportActionBar
+        //actionBar?.title = title
+
+        actionBar?.setShowHideAnimationEnabled(false)
+        actionBar?.hide()
 
         val args = BookDetailFragmentArgs.fromBundle(requireArguments())
         val imageUrl = args.imageUrl
@@ -81,18 +89,14 @@ class BookDetailFragment : Fragment() {
         val author = args.author
         val detailUrl = args.bookDetailUrl
 
-        val actionBar = (activity as MainActivity).supportActionBar
-        actionBar?.title = title
 
-        actionBar?.setShowHideAnimationEnabled(false)
-        actionBar?.hide()
 
         binding.toolbar.title = title
         binding.tempAuthor.text = author
 
-        binding.toolbarBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+       binding.toolbar.setNavigationOnClickListener {
+           findNavController().navigateUp()
+       }
 
 
         //Collapsing Bar kapanınca Add Favorite göster açılınca gizle.
@@ -170,6 +174,11 @@ class BookDetailFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onStop() {
+        super.onStop()
+        actionBar?.show()
     }
 
 

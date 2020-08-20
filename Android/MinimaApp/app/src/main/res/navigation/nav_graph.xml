@@ -57,4 +57,9 @@
         android:id="@+id/graphicsFragment"
         android:name="com.example.minimaapp.ui.GraphicsFragment"
         android:label="GraphicsFragment" />
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.example.minimaapp.ui.GamesFragment"
+        android:label="Games"
+        tools:layout="@layout/fragment_games" />
 </navigation>

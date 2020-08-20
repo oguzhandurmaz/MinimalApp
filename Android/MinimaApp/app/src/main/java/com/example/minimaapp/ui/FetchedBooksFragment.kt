@@ -94,13 +94,5 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
         viewModel.getBooks()
     }
 
-    override fun onResume() {
-        super.onResume()
-        val actionBar = (activity as MainActivity).supportActionBar
-
-        actionBar?.setShowHideAnimationEnabled(false)
-        actionBar?.show()
-    }
-
 
 }
