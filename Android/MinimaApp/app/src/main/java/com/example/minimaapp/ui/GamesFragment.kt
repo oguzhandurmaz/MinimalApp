@@ -22,7 +22,8 @@ import kotlinx.android.synthetic.main.fragment_games.*
  */
 class GamesFragment : Fragment() {
 
-    private lateinit var binding: FragmentGamesBinding
+    private var _binding: FragmentGamesBinding? = null
+    private val binding get() = _binding!!
 
     private var actionBar: androidx.appcompat.app.ActionBar? = null
 
@@ -31,15 +32,13 @@ class GamesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentGamesBinding.inflate(inflater)
+        _binding = FragmentGamesBinding.inflate(inflater)
 
         setHasOptionsMenu(true)
 
         actionBar = (activity as MainActivity).supportActionBar
         actionBar?.setShowHideAnimationEnabled(false)
         actionBar?.hide()
-
-        binding.toolbarGames.title = "Games"
 
         binding.toolbarGames.setNavigationOnClickListener {
             findNavController().navigateUp()
@@ -53,13 +52,13 @@ class GamesFragment : Fragment() {
             when(position){
                 CHESS -> {
                     tab.apply {
-                        text = "Chess"
+                        text = getString(R.string.chess)
                         icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_chess)
                     }
                 }
                 RUBIK -> {
                     tab.apply {
-                        text = "Rubik"
+                        text = getString(R.string.rubik)
                         icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_rubik_cube)
                     }
                 }
@@ -72,6 +71,11 @@ class GamesFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         actionBar?.show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 

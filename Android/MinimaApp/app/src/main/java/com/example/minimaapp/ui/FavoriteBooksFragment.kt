@@ -3,7 +3,6 @@ package com.example.minimaapp.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -14,15 +13,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.example.minimaapp.AutoClearedValue
 import com.example.minimaapp.IRecyclerOnClickListener
-import com.example.minimaapp.MainActivity
 import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewFavoriteBooksAdapter
 import com.example.minimaapp.databinding.FragmentFavoriteBooksBinding
 import com.example.minimaapp.viewmodel.FavoriteBooksViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.fragment_book_detail.*
-import kotlinx.android.synthetic.main.recyclerview_favoritebooks.*
 import java.util.*
 
 /**
@@ -49,27 +45,39 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
                 author,
                 detailUrl
             )
-        findNavController().navigate(action,extras)
+        findNavController().navigate(action, extras)
     }
 
     override fun onDeleteListener(position: Int) {
         viewModel.delete(position)
     }
 
-    private lateinit var binding: FragmentFavoriteBooksBinding
+    /*private var _binding: FragmentFavoriteBooksBinding? = null
+    private val binding get() = _binding!!*/
+
+    //private var binding by AutoClearedValue<FragmentFavoriteBooksBinding>()
+    private var _binding: FragmentFavoriteBooksBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: FavoriteBooksViewModel
     private lateinit var viewModelFactory: FavoriteBooksViewModel.FavoriteBooksViewModelFactory
 
+    //private lateinit var adapter: RecyclerViewFavoriteBooksAdapter
+    private var adapter by AutoClearedValue<RecyclerViewFavoriteBooksAdapter>()
 
-    private lateinit var adapter: RecyclerViewFavoriteBooksAdapter
+
+    private val preDrawListener = ViewTreeObserver.OnPreDrawListener {
+        startPostponedEnterTransition()
+        true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentFavoriteBooksBinding.inflate(inflater)
+        _binding = FragmentFavoriteBooksBinding.inflate(inflater)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModelFactory =
             FavoriteBooksViewModel.FavoriteBooksViewModelFactory(
@@ -87,10 +95,7 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
         binding.recyclerFavBooks.adapter = adapter
         binding.recyclerFavBooks.apply {
             postponeEnterTransition()
-            viewTreeObserver.addOnPreDrawListener {
-                startPostponedEnterTransition()
-                true
-            }
+            viewTreeObserver.addOnPreDrawListener(preDrawListener)
         }
 
 
@@ -117,7 +122,7 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
         val searchMenu = menu.findItem(R.id.search_book)
         val searchView = searchMenu.actionView as SearchView
 
-        searchMenu.setOnActionExpandListener(object : MenuItem.OnActionExpandListener{
+        searchMenu.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
                 return true
             }
@@ -141,7 +146,11 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
 
                 //Set Filter Result to Adapter
                 if (filteredList.isNullOrEmpty()) {
-                    Toast.makeText(requireContext(),"Eşleşen Kitap Bulunamadı",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_macth_books),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     adapter.setData(filteredList)
                 }
@@ -156,5 +165,12 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
 
         })
 
+    }
+
+    override fun onDestroyView() {
+        binding.recyclerFavBooks.viewTreeObserver.removeOnPreDrawListener(preDrawListener)
+        binding.recyclerFavBooks.adapter = null
+        _binding = null
+        super.onDestroyView()
     }
 }

@@ -103,7 +103,7 @@ class GraphicsFragment : Fragment() {
                 entries.add(BarEntry((entries.size+1).toFloat(),0f))
             }
         }
-        val barDataSet = BarDataSet(entries,"Counts")
+        val barDataSet = BarDataSet(entries,getString(R.string.count))
         barDataSet.color = ContextCompat.getColor(requireContext(),R.color.purple)
         val barData = BarData(barDataSet)
         //Bar üstündeki değerleri 0.0 dan 0 yapmak için.
@@ -130,7 +130,7 @@ class GraphicsFragment : Fragment() {
                 entries.add(BarEntry((entries.size+1).toFloat(),0f))
             }
         }
-        val barDataSet = BarDataSet(entries,"Time")
+        val barDataSet = BarDataSet(entries,getString(R.string.time))
         barDataSet.color = ContextCompat.getColor(requireContext(),R.color.blue)
         val barData = BarData(barDataSet)
         //Bar üstündeki değerleri 0.0 dan 0 yapmak için.

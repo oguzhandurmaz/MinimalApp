@@ -40,7 +40,7 @@ class RecyclerViewFavoriteBooksAdapter(private val callback: IRecyclerOnClickLis
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = RecyclerviewFavoritebooksBinding.inflate(
             layoutInflater, parent, false)
-        return RecyclerViewFavoriteBooksAdapter.viewHolder(binding)
+        return viewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {

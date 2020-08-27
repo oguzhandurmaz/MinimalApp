@@ -20,8 +20,8 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/Theme.AppCompat.Light"
-                app:title="dfdf"
                 app:navigationIcon="@drawable/ic_arrow_back"
+                app:title="@string/games_fragment"
                >
             </androidx.appcompat.widget.Toolbar>
 
@@ -33,7 +33,7 @@
                     android:id="@+id/tab_layout"
                     app:tabTextColor="@color/white"
                     app:tabSelectedTextColor="@color/light_pink"
-                    app:tabMode="fixed"
+                    app:tabMode="auto"
                     android:translationZ="4dp"
                     android:elevation="4dp"
                     app:tabIndicatorColor="@color/light_pink"

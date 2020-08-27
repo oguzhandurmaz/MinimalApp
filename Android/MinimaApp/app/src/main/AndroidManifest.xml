@@ -14,9 +14,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        app:popupTheme="@style/NoActionBarTheme"
-        android:theme="@style/NoActionBarTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/MaterialNoActionBarTheme">
+        <activity android:name=".MainActivity"
+            android:theme="@style/MaterialNoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

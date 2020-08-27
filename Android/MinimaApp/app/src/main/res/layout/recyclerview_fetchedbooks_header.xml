@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/gray">
+
+
+        <TextView
+            android:id="@+id/text_website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1000kitap.com"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:drawableBottom="@drawable/ic_world"
+            android:textAlignment="center"
+            android:textColor="@color/blue"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="Bilgiler 1000kitap.com adresinden alınmıştır."/>
+
+    </LinearLayout>
+
+</layout>

@@ -17,4 +17,13 @@
         <item name="android:actionMenuTextColor">@color/blue</item>
     </style>
 
+    <style name="MaterialNoActionBarTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/light_purple</item>
+        <item name="colorAccent">@color/purple</item>
+        <item name="actionMenuTextColor">@color/blue</item>
+        <item name="android:actionBarItemBackground">@color/blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
 </resources>

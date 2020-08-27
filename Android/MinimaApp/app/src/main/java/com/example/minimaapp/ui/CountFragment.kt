@@ -33,7 +33,8 @@ import java.util.*
  */
 class CountFragment : Fragment() {
 
-    private lateinit var binding: FragmentCountBinding
+    private var _binding: FragmentCountBinding? = null
+    private val binding get() = _binding!!
 
     //ViewModel
     private lateinit var viewModel: CountViewModel
@@ -46,7 +47,7 @@ class CountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentCountBinding.inflate(inflater)
+        _binding = FragmentCountBinding.inflate(inflater)
 
         //viewModel
         viewModelFactory =
@@ -75,9 +76,9 @@ class CountFragment : Fragment() {
         isServiceRunning = getServiceState(requireContext())
 
         if (isServiceRunning) {
-            binding.btnStart.text = "Stop"
+            binding.btnStart.text = getString(R.string.stop)
         } else {
-            binding.btnStart.text = "Start"
+            binding.btnStart.text = getString(R.string.start)
         }
         
 
@@ -112,11 +113,11 @@ class CountFragment : Fragment() {
             }
             if (isServiceRunning) {
                 requireActivity().stopService(intent)
-                binding.btnStart.text = "Start"
+                binding.btnStart.text = getString(R.string.start)
 
             } else {
                 ContextCompat.startForegroundService(requireContext(), intent)
-                binding.btnStart.text = "Stop"
+                binding.btnStart.text = getString(R.string.stop)
             }
         }
 
@@ -127,10 +128,10 @@ class CountFragment : Fragment() {
 
 
     fun setValuesToTextViews() {
-        val count = "Count\n${getScreenOnCount(context)}"
-        val time = "Time\n${getScreenOnTime(context)}"
+        val count = "${getString(R.string.count)}\n${getScreenOnCount(context)}"
+        val time = "${getString(R.string.time)}\n${getScreenOnTime(context)}"
         val temp = getDate(requireContext()).split("-")
-        val date = "Date\n${temp[0]}-${temp[1]}\n${temp[2]}"
+        val date = "${getString(R.string.date)}\n${temp[0]}-${temp[1]}\n${temp[2]}"
         binding.textCount.text = count
         binding.textTime.text = time
         binding.textDate.text = date
@@ -154,6 +155,11 @@ class CountFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.d("Minimal", "onAttach")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

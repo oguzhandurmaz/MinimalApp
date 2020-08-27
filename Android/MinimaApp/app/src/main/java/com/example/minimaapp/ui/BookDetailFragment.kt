@@ -21,6 +21,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.example.minimaapp.AutoClearedValue
+import com.example.minimaapp.AutoClearedValue_LifecycleAdapter
 import com.example.minimaapp.ui.BookDetailFragmentArgs
 import com.example.minimaapp.viewmodel.BookDetailViewModel
 import com.example.minimaapp.viewmodel.BookDetailViewModel.*
@@ -35,9 +37,7 @@ import kotlin.math.abs
  */
 class BookDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentBookDetailBinding
-
-
+    private var binding by AutoClearedValue<FragmentBookDetailBinding>()
     //ViewModel
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var viewModelFactory: BookDetailViewModelFactory
@@ -69,6 +69,7 @@ class BookDetailFragment : Fragment() {
 
         // Inflate the layout for this fragment
         binding = FragmentBookDetailBinding.inflate(inflater)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         //ViewModel
         viewModelFactory = BookDetailViewModelFactory(requireActivity().application)

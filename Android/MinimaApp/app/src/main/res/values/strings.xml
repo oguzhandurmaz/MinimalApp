@@ -3,4 +3,25 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="general_info_fragment">Genel Bilgiler</string>
+    <string name="charts_fragment">Grafikler</string>
+    <string name="fetched_book_fragment">Yeni Kitaplar - Son 25</string>
+    <string name="games_fragment">Oyunlar</string>
+    <string name="book_detail_fragment">Kitap Bilgi</string>
+    <string name="favorite_fragment">Favori Kitaplar</string>
+
+    <string name="date">Tarih</string>
+    <string name="count">Sayı</string>
+    <string name="time">Zaman</string>
+    <string name="add_favorite">Favoriye Ekle</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+    <string name="no_macth_books">Eşleşen Kitap Bulunamadı</string>
+    <string name="load_book_error">Kitaplar Yüklenemedi</string>
+
+    <string name="chess">Satranç</string>
+    <string name="rubik">Rubik Küp</string>
+
 </resources>

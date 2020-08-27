@@ -2,19 +2,20 @@ package com.example.minimaapp.ui
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.example.minimaapp.ui.FetchedBooksFragmentDirections
+import com.example.minimaapp.AutoClearedValue
 import com.example.minimaapp.IRecyclerOnClickListener
-import com.example.minimaapp.MainActivity
+import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewFetchedBooksAdapter
 import com.example.minimaapp.databinding.FragmentFetchedBooksBinding
 import com.example.minimaapp.viewmodel.FetchedBooksViewModel
@@ -43,7 +44,10 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
         findNavController().navigate(action,extras)
     }
 
-    private lateinit var binding: FragmentFetchedBooksBinding
+    private var _binding: FragmentFetchedBooksBinding? = null
+    private val binding get() = _binding!!
+
+    //private var binding by AutoClearedValue<FragmentFetchedBooksBinding>()
 
     //ViewModel
     private lateinit var viewModel: FetchedBooksViewModel
@@ -56,7 +60,8 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
     ): View? {
 
         // Inflate the layout for this fragment
-        binding = FragmentFetchedBooksBinding.inflate(inflater)
+        _binding = FragmentFetchedBooksBinding.inflate(inflater)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModelFactory = FetchedBooksViewModel.FetchedBooksViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this,viewModelFactory).get(FetchedBooksViewModel::class.java)
@@ -66,10 +71,7 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
         binding.recyclerBooks.adapter = adapter
         binding.recyclerBooks.apply {
             postponeEnterTransition()
-            viewTreeObserver.addOnPreDrawListener {
-                startPostponedEnterTransition()
-                true
-            }
+            viewTreeObserver.addOnPreDrawListener(preDrawListener)
         }
 
         fetchBooks()
@@ -77,21 +79,30 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
         viewModel.books.observe(viewLifecycleOwner, Observer {
             it?.let { adapter.submitList(it) }
             if(it.isEmpty()){
-                Toast.makeText(requireContext(),"Couldn't Load Books",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),getString(R.string.load_book_error),Toast.LENGTH_SHORT).show()
             }
             binding.swipeRefresh.isRefreshing = false
             binding.swipeRefresh.isEnabled = false
         })
 
-
-
         return binding.root
+    }
+    private var preDrawListener = ViewTreeObserver.OnPreDrawListener {
+        startPostponedEnterTransition()
+        true
     }
 
     private fun fetchBooks(){
         binding.swipeRefresh.isEnabled = true
         binding.swipeRefresh.isRefreshing = true
         viewModel.getBooks()
+    }
+
+    override fun onDestroyView() {
+        binding.recyclerBooks.viewTreeObserver.removeOnPreDrawListener(preDrawListener)
+        binding.recyclerBooks.adapter = null
+        _binding = null
+        super.onDestroyView()
     }
 
 

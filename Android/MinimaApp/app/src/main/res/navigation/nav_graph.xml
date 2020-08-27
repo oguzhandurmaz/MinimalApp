@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/countFragment"
         android:name="com.example.minimaapp.ui.CountFragment"
-        android:label="General Informations"
+        android:label="@string/general_info_fragment"
         tools:layout="@layout/fragment_count" />
     <fragment
         android:id="@+id/fetchedBooksFragment"
         android:name="com.example.minimaapp.ui.FetchedBooksFragment"
-        android:label="New Books - Last 25"
-        tools:layout="@layout/fragment_fetched_books" >
+        android:label="@string/fetched_book_fragment"
+        tools:layout="@layout/fragment_fetched_books">
         <action
             android:id="@+id/action_fetchedBooksFragment_to_bookDetailFragment"
             app:destination="@id/bookDetailFragment"
@@ -26,8 +26,8 @@
     <fragment
         android:id="@+id/bookDetailFragment"
         android:name="com.example.minimaapp.ui.BookDetailFragment"
-        android:label="Book Detail"
-        tools:layout="@layout/fragment_book_detail" >
+        android:label="@string/book_detail_fragment"
+        tools:layout="@layout/fragment_book_detail">
         <argument
             android:name="imageUrl"
             app:argType="string" />
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/favoriteBooksFragment"
         android:name="com.example.minimaapp.ui.FavoriteBooksFragment"
-        android:label="Favorite Books" >
+        android:label="@string/favorite_fragment">
         <action
             android:id="@+id/action_favoriteBooksFragment_to_bookDetailFragment"
             app:destination="@id/bookDetailFragment"
@@ -56,10 +56,10 @@
     <fragment
         android:id="@+id/graphicsFragment"
         android:name="com.example.minimaapp.ui.GraphicsFragment"
-        android:label="GraphicsFragment" />
+        android:label="@string/charts_fragment" />
     <fragment
         android:id="@+id/gamesFragment"
         android:name="com.example.minimaapp.ui.GamesFragment"
-        android:label="Games"
+        android:label="@string/games_fragment"
         tools:layout="@layout/fragment_games" />
 </navigation>

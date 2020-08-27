@@ -17,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.minimaapp.utils.Utils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -62,5 +63,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.host_fragment)
         return NavigationUI.navigateUp(navController,drawer_layout)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 }

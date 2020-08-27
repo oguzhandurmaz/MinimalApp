@@ -88,7 +88,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:elevation="4dp"
-                android:text="Author"
                 android:maxLines="1"
                 app:recyclerBookAuthor="@{fetchedBooks}"
                 android:scrollHorizontally="true"
