@@ -10,8 +10,9 @@ import org.jsoup.Jsoup
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
+import javax.inject.Inject
 
-class BookRepository(private val bookDao: BookDao) {
+class BookRepository @Inject constructor(private val bookDao: BookDao) {
 
 
     //Favorite Books Section

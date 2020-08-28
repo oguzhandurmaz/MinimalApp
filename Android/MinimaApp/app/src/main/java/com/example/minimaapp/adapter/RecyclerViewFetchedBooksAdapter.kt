@@ -14,8 +14,9 @@ import com.example.minimaapp.data.Book
 import com.example.minimaapp.databinding.RecyclerviewFetchedbooksBinding
 import com.example.minimaapp.databinding.RecyclerviewFetchedbooksHeaderBinding
 import com.example.minimaapp.utils.Constants
+import javax.inject.Inject
 
-class RecyclerViewFetchedBooksAdapter(
+class RecyclerViewFetchedBooksAdapter (
     private val callback: IRecyclerOnClickListener
 ) :
     ListAdapter<Book, RecyclerView.ViewHolder>(BookDiffCallback()) {

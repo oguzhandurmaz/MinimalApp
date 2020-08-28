@@ -19,12 +19,15 @@ import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewFavoriteBooksAdapter
 import com.example.minimaapp.databinding.FragmentFavoriteBooksBinding
 import com.example.minimaapp.viewmodel.FavoriteBooksViewModel
+import com.example.minimaapp.viewmodel.ViewModelProviderFactory
+import dagger.android.support.DaggerFragment
 import java.util.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
+class FavoriteBooksFragment : DaggerFragment(), IRecyclerOnClickListener {
     override fun onClickListener(
         position: Int,
         url: String,
@@ -60,7 +63,8 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: FavoriteBooksViewModel
-    private lateinit var viewModelFactory: FavoriteBooksViewModel.FavoriteBooksViewModelFactory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProviderFactory
 
     //private lateinit var adapter: RecyclerViewFavoriteBooksAdapter
     private var adapter by AutoClearedValue<RecyclerViewFavoriteBooksAdapter>()
@@ -79,10 +83,10 @@ class FavoriteBooksFragment : Fragment(), IRecyclerOnClickListener {
         _binding = FragmentFavoriteBooksBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModelFactory =
+      /*  viewModelFactory =
             FavoriteBooksViewModel.FavoriteBooksViewModelFactory(
                 requireActivity().application
-            )
+            )*/
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(FavoriteBooksViewModel::class.java)
 

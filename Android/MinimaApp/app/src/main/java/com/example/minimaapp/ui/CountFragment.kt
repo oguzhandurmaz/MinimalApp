@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.RequestManager
 import com.example.minimaapp.CountService
 import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewRegisterAdapter
@@ -25,20 +26,29 @@ import com.example.minimaapp.utils.Utils.Companion.saveAndResetValues
 import com.example.minimaapp.utils.Utils.Companion.saveDate
 import com.example.minimaapp.utils.Utils.Companion.saveServiceState
 import com.example.minimaapp.viewmodel.CountViewModel
+import com.example.minimaapp.viewmodel.ViewModelProviderFactory
+import dagger.android.support.DaggerFragment
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class CountFragment : Fragment() {
+class CountFragment : DaggerFragment() {
 
     private var _binding: FragmentCountBinding? = null
     private val binding get() = _binding!!
 
+    @Inject lateinit var adapter: RecyclerViewRegisterAdapter
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProviderFactory
+
+
     //ViewModel
     private lateinit var viewModel: CountViewModel
-    private lateinit var viewModelFactory: CountViewModel.CountViewModelFactory
+    //private lateinit var viewModelFactory: CountViewModel.CountViewModelFactory
 
     private var isServiceRunning = false
 
@@ -50,12 +60,13 @@ class CountFragment : Fragment() {
         _binding = FragmentCountBinding.inflate(inflater)
 
         //viewModel
-        viewModelFactory =
-            CountViewModel.CountViewModelFactory(requireActivity().application)
+//        viewModelFactory =
+//            CountViewModel.CountViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(CountViewModel::class.java)
 
-        val adapter = RecyclerViewRegisterAdapter()
+        //val adapter = RecyclerViewRegisterAdapter()
         binding.recyclerview.adapter = adapter
+
 
         //Set Date
         StaticVariables.date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
@@ -159,6 +170,7 @@ class CountFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.recyclerview.adapter = null
         _binding = null
     }
 

@@ -1,6 +1,7 @@
 package com.example.minimaapp
 
 import android.widget.ImageView
+import javax.inject.Inject
 
 interface IRecyclerOnClickListener {
 

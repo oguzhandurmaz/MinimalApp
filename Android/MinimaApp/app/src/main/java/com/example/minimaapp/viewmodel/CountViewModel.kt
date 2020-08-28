@@ -2,19 +2,19 @@ package com.example.minimaapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.minimaapp.data.CountRoomDatabase
 import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.repo.CountRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CountViewModel(application: Application) : AndroidViewModel(application) {
-    private var countRepository: CountRepository
+class CountViewModel @Inject constructor(application: Application, private val countRepository: CountRepository) : AndroidViewModel(application) {
+    //private var countRepository: CountRepository
 
     val countDataSeven: LiveData<List<Count>>
 
     init {
-        val countDao = CountRoomDatabase.getDataBase(application).countDao()
-        countRepository = CountRepository(countDao)
+        //val countDao = CountRoomDatabase.getDataBase(application).countDao()
+        //countRepository = CountRepository(countDao)
 
         countDataSeven = countRepository.countSeven
 
@@ -32,13 +32,13 @@ class CountViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    @Suppress("UNCHECKED_CAST")
+   /* @Suppress("UNCHECKED_CAST")
     class CountViewModelFactory(private val application: Application) :
         ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return (CountViewModel(application)) as T
         }
-    }
+    }*/
 
 
 }

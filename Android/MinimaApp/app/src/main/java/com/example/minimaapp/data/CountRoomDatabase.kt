@@ -8,6 +8,7 @@ import com.example.minimaapp.data.dao.BookDao
 import com.example.minimaapp.data.dao.CountDao
 import com.example.minimaapp.data.table.BookTable
 import com.example.minimaapp.data.table.Count
+import javax.inject.Inject
 
 @Database(entities = [Count::class, BookTable::class],version = 1,exportSchema = true)
 abstract class CountRoomDatabase: RoomDatabase() {

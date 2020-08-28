@@ -29,18 +29,23 @@ import com.example.minimaapp.viewmodel.BookDetailViewModel.*
 import com.example.minimaapp.data.table.BookTable
 import com.example.minimaapp.MainActivity
 import com.example.minimaapp.databinding.FragmentBookDetailBinding
+import com.example.minimaapp.viewmodel.ViewModelProviderFactory
 import com.google.android.material.appbar.AppBarLayout
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 import kotlin.math.abs
 
 /**
  * A simple [Fragment] subclass.
  */
-class BookDetailFragment : Fragment() {
+class BookDetailFragment : DaggerFragment() {
 
     private var binding by AutoClearedValue<FragmentBookDetailBinding>()
     //ViewModel
     private lateinit var viewModel: BookDetailViewModel
-    private lateinit var viewModelFactory: BookDetailViewModelFactory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProviderFactory
+   // private lateinit var viewModelFactory: BookDetailViewModelFactory
 
     private var actionBar: ActionBar? = null
 
@@ -72,7 +77,7 @@ class BookDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         //ViewModel
-        viewModelFactory = BookDetailViewModelFactory(requireActivity().application)
+        //viewModelFactory = BookDetailViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(BookDetailViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner

@@ -19,11 +19,14 @@ import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewFetchedBooksAdapter
 import com.example.minimaapp.databinding.FragmentFetchedBooksBinding
 import com.example.minimaapp.viewmodel.FetchedBooksViewModel
+import com.example.minimaapp.viewmodel.ViewModelProviderFactory
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
+class FetchedBooksFragment: DaggerFragment(), IRecyclerOnClickListener {
     override fun onClickListener(
         position: Int,
         url: String,
@@ -51,7 +54,9 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
 
     //ViewModel
     private lateinit var viewModel: FetchedBooksViewModel
-    private lateinit var viewModelFactory: FetchedBooksViewModel.FetchedBooksViewModelFactory
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProviderFactory
 
 
     override fun onCreateView(
@@ -63,7 +68,7 @@ class FetchedBooksFragment : Fragment(), IRecyclerOnClickListener {
         _binding = FragmentFetchedBooksBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModelFactory = FetchedBooksViewModel.FetchedBooksViewModelFactory(requireActivity().application)
+        //viewModelFactory = FetchedBooksViewModel.FetchedBooksViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this,viewModelFactory).get(FetchedBooksViewModel::class.java)
 
 

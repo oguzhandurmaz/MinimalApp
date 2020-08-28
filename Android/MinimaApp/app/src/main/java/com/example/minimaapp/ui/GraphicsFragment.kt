@@ -12,24 +12,31 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.minimaapp.R
 import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.databinding.FragmentGraphicsBinding
+import com.example.minimaapp.di.ViewModelFactoryModule
 import com.example.minimaapp.viewmodel.GraphicsFragmentViewModel
+import com.example.minimaapp.viewmodel.ViewModelProviderFactory
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class GraphicsFragment : Fragment() {
+class GraphicsFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentGraphicsBinding
 
 
     private lateinit var viewModel: GraphicsFragmentViewModel
-    private lateinit var viewModelFactory: GraphicsFragmentViewModel.GraphicsFragmentViewModelFactory
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProviderFactory
+    //private lateinit var viewModelFactory: GraphicsFragmentViewModel.GraphicsFragmentViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +45,7 @@ class GraphicsFragment : Fragment() {
 
         binding = FragmentGraphicsBinding.inflate(inflater)
 
-        viewModelFactory = GraphicsFragmentViewModel.GraphicsFragmentViewModelFactory(requireActivity().application)
+        //viewModelFactory = GraphicsFragmentViewModel.GraphicsFragmentViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this,viewModelFactory).get(GraphicsFragmentViewModel::class.java)
 
         viewModel.countDataSeven.observe(viewLifecycleOwner, Observer {data ->

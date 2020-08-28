@@ -8,8 +8,9 @@ import kotlinx.coroutines.Dispatchers.IO
 import org.jsoup.Jsoup
 import java.io.IOException
 import java.util.*
+import javax.inject.Inject
 
-class CountRepository(private val countDao: CountDao) {
+class CountRepository @Inject constructor(private val countDao: CountDao) {
 
     val countSeven = countDao.getLastSevenData()
 

@@ -2,6 +2,7 @@ package com.example.minimaapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View.LAYOUT_DIRECTION_RTL
@@ -17,12 +18,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.minimaapp.data.CountRoomDatabase
+import com.example.minimaapp.data.dao.BookDao
 import com.example.minimaapp.utils.Utils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import dagger.android.DaggerActivity
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
+    @Inject
+    lateinit var roomDatabase: CountRoomDatabase
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val navController = findNavController(R.id.host_fragment)
 
@@ -44,6 +55,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if(roomDatabase == null){
+            Log.d("Main","BookDao Null")
+        }
 
         setSupportActionBar(findViewById(R.id.actionBar))
 

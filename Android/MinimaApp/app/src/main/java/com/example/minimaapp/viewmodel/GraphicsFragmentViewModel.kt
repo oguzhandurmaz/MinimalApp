@@ -6,25 +6,26 @@ import com.example.minimaapp.data.CountRoomDatabase
 import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.repo.CountRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GraphicsFragmentViewModel(application: Application): AndroidViewModel(application) {
+class GraphicsFragmentViewModel @Inject constructor(application: Application,private val countRepository: CountRepository): AndroidViewModel(application) {
 
-    private var countRepository: CountRepository
+    //private var countRepository: CountRepository
 
     val countDataSeven: LiveData<List<Count>>
 
     init{
-        val countDao = CountRoomDatabase.getDataBase(application).countDao()
-        countRepository = CountRepository(countDao)
+        /*val countDao = CountRoomDatabase.getDataBase(application).countDao()
+        countRepository = CountRepository(countDao)*/
 
         countDataSeven = countRepository.countSeven
     }
 
 
-    @Suppress("UNCHECKED_CAST")
+    /*@Suppress("UNCHECKED_CAST")
     class GraphicsFragmentViewModelFactory(val application: Application): ViewModelProvider.NewInstanceFactory(){
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return (GraphicsFragmentViewModel(application)) as T
         }
-    }
+    }*/
 }

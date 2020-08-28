@@ -15,17 +15,22 @@ import com.example.minimaapp.databinding.FragmentGamesBinding
 import com.example.minimaapp.utils.Constants.CHESS
 import com.example.minimaapp.utils.Constants.RUBIK
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_games.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class GamesFragment : Fragment() {
+class GamesFragment : DaggerFragment() {
 
     private var _binding: FragmentGamesBinding? = null
     private val binding get() = _binding!!
 
     private var actionBar: androidx.appcompat.app.ActionBar? = null
+
+    @Inject
+    lateinit var adapter: ViewPagerGamesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +50,7 @@ class GamesFragment : Fragment() {
         }
 
 
-        val adapter = ViewPagerGamesAdapter()
+        //val adapter = ViewPagerGamesAdapter()
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab, position ->

@@ -4,11 +4,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.minimaapp.data.Book
 import com.example.minimaapp.data.table.BookTable
 import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.R
+import javax.inject.Inject
 
 @BindingAdapter("recyclerBookTitle")
 fun TextView.setTitle(item: Book){
@@ -17,6 +19,8 @@ fun TextView.setTitle(item: Book){
 
 @BindingAdapter("recyclerBookImage")
 fun ImageView.setImage(item: Book){
+
+
     Glide.with(this)
         .load(item.imgUrl)
         .into(this)
