@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="date_font_size">28sp</dimen>
+    <dimen name="count_font_size">38sp</dimen>
+    <dimen name="time_font_size">28sp</dimen>
+    <dimen name="start_service_font_size">16sp</dimen>
+    <dimen name="chess_text_font_size">20sp</dimen>
+    <dimen name="rubik_text_font_size">20sp</dimen>
+    <dimen name="estimated_text_font_size">18sp</dimen>
+    <dimen name="estimated_info_font_size">18sp</dimen>
+    <dimen name="booklist_image_width">98dp</dimen>
+    <dimen name="booklist_image_height">108dp</dimen>
+    <dimen name="booklist_book_title_font_size">18sp</dimen>
+    <dimen name="booklist_book_author_font_size">16sp</dimen>
+    <dimen name="image_delete_width">30dp</dimen>
+    <dimen name="image_delete_height">30dp</dimen>
+    <dimen name="recycler_header_site_font_size">18sp</dimen>
+    <dimen name="recycler_header_site_info_font_size">12sp</dimen>
+    <dimen name="recycer_register_date">18sp</dimen>
+    <dimen name="recycler_register_count">18sp</dimen>
+    <dimen name="recycler_register_time">18sp</dimen>
+    <dimen name="book_detail_image_width">148dp</dimen>
+    <dimen name="book_detail_image_height">178dp</dimen>
+</resources>

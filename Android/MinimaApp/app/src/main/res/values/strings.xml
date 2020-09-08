@@ -24,4 +24,6 @@
     <string name="chess">Satranç</string>
     <string name="rubik">Rubik Küp</string>
 
+    <string name="estimated_number">Tahmini Sayı</string>
+
 </resources>

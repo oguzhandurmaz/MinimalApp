@@ -10,16 +10,17 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:background="@drawable/recyclerview_bg_shape">
 
         <TextView
             android:id="@+id/recycler_date"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:textSize="16dp"
+            android:textSize="@dimen/recycer_register_date"
+            android:padding="4dp"
             android:text="20-12-2020"
             android:elevation="4dp"
             android:translationZ="4dp"
@@ -33,10 +34,11 @@
         <TextView
             android:id="@+id/recycler_count"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="500"
-            android:textSize="16dp"
+            android:textSize="@dimen/recycler_register_count"
+            android:padding="4dp"
             android:elevation="4dp"
             android:translationZ="4dp"
             app:count ="@{count}"
@@ -49,16 +51,17 @@
         <TextView
             android:id="@+id/recycler_time"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:background="@drawable/textview_time_shape"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             android:elevation="4dp"
+            android:padding="4dp"
             app:time="@{count}"
             android:translationZ="4dp"
             android:text="400"
-            android:textSize="16dp"
+            android:textSize="@dimen/recycler_register_time"
             android:layout_gravity="center"
             android:gravity="center"/>
     </LinearLayout>

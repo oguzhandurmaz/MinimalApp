@@ -24,6 +24,10 @@
             android:id="@+id/gamesFragment"
             android:title="Games"/>
 
+        <item
+            android:id="@+id/exportDataFragment"
+            android:title="Export Data"/>
+
     </group>
 
 

@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/recycler_book_image"
-                android:layout_width="100dp"
-                android:layout_height="110dp"
+                android:layout_width="@dimen/booklist_image_width"
+                android:layout_height="@dimen/booklist_image_height"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
@@ -75,7 +75,7 @@
                 android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:textColor="@color/white"
-                android:textSize="16dp"
+                android:textSize="@dimen/booklist_book_title_font_size"
                 android:translationZ="4dp"
                 app:layout_constraintEnd_toEndOf="@id/recycler_info_bg"
                 app:layout_constraintStart_toStartOf="@+id/recycler_info_bg"
@@ -92,7 +92,7 @@
                 app:recyclerBookAuthor="@{fetchedBooks}"
                 android:scrollHorizontally="true"
                 android:textColor="@color/white"
-                android:textSize="16dp"
+                android:textSize="@dimen/booklist_book_author_font_size"
                 android:translationZ="4dp"
                 app:layout_constraintEnd_toEndOf="@id/recycler_book_title"
                 app:layout_constraintStart_toStartOf="@+id/recycler_book_title"

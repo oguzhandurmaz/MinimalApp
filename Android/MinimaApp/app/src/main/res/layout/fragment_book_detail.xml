@@ -41,8 +41,8 @@
                     <ImageView
                         android:transitionName="image_view"
                         android:id="@+id/temp"
-                        android:layout_width="150dp"
-                        android:layout_height="180dp"
+                        android:layout_width="@dimen/book_detail_image_width"
+                        android:layout_height="@dimen/book_detail_image_height"
                         android:layout_marginTop="8dp"
                         app:detailImageLoad="@{imageUrl}"
                         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/recycler_header_site_font_size"
                         android:maxLines="2"
                         android:ellipsize="end"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
                     android:padding="8dp"
                     android:text="@{viewModel.fetchedBookDetail}"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
+                    android:textSize="@dimen/chess_text_font_size"
                    />
 
             </androidx.core.widget.NestedScrollView>
@@ -117,7 +117,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:gravity="center"
             android:layout_gravity="bottom"
-            android:textSize="20sp"
+            android:textSize="@dimen/start_service_font_size"
             android:textColor="@color/white"
             android:background="@drawable/button_add"
             />

@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/recycler_fav_book_image"
-                android:layout_width="100dp"
-                android:layout_height="110dp"
+                android:layout_width="@dimen/booklist_image_width"
+                android:layout_height="@dimen/booklist_image_height"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
@@ -74,7 +74,8 @@
                 app:recyclerFavBookTitle="@{favoriteBooks}"
                 android:scrollHorizontally="true"
                 android:textColor="@color/white"
-                android:textSize="16dp"
+                android:textSize="@dimen/booklist_book_title_font_size"
+                android:text="70 Günde Devri Alem"
                 android:translationZ="4dp"
                 app:layout_constraintEnd_toEndOf="@id/recycler_fav_info_bg"
                 app:layout_constraintStart_toStartOf="@+id/recycler_fav_info_bg"
@@ -90,7 +91,8 @@
                 android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:textColor="@color/white"
-                android:textSize="16dp"
+                android:textSize="@dimen/booklist_book_author_font_size"
+                android:text="Arthur Wilde"
                 android:translationZ="4dp"
                 app:recyclerFavBookAuthor="@{favoriteBooks}"
                 app:layout_constraintEnd_toEndOf="@id/recycler_fav_book_title"
@@ -99,8 +101,8 @@
 
             <ImageView
                 android:id="@+id/recycler_fav_book_delete"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="@dimen/image_delete_width"
+                android:layout_height="@dimen/image_delete_height"
                 android:src="@drawable/ic_delete"
                 android:translationZ="4dp"
                 android:elevation="4dp"

@@ -62,4 +62,9 @@
         android:name="com.example.minimaapp.ui.GamesFragment"
         android:label="@string/games_fragment"
         tools:layout="@layout/fragment_games" />
+    <fragment
+        android:id="@+id/exportDataFragment"
+        android:name="com.example.minimaapp.ui.ExportDataFragment"
+        android:label="Export Data"
+        tools:layout="@layout/fragment_export_data" />
 </navigation>
