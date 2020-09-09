@@ -25,5 +25,8 @@ abstract class MainFragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeGamesFragment(): GamesFragment
 
+    @ContributesAndroidInjector
+    abstract fun contributeExportDataFragment(): ExportDataFragment
+
 
 }

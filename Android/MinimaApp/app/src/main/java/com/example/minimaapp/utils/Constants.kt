@@ -8,4 +8,6 @@ object Constants {
     const val RUBIK: Int = 1
 
     const val FETCHED_BOOKS_HEADER = 0
+
+    const val SAVE_DATA = 1
 }

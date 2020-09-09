@@ -49,7 +49,7 @@ class CommonReceiver : BroadcastReceiver() {
                             ).format(Date())
                         ) {
                             //Set Time Variable for Show TextView
-                            StaticVariables.time = getScreenOnTime(this)
+                            //StaticVariables.time = getScreenOnTime(this)
                             Intent(this, CountService::class.java).let {
                                 it.putExtra("count", getScreenOnCount(this))
                                 ContextCompat.startForegroundService(
@@ -64,10 +64,10 @@ class CommonReceiver : BroadcastReceiver() {
                                 "dd-MM-yyyy",
                                 Locale.getDefault()
                             ).format(Date()))
-                            StaticVariables.date = SimpleDateFormat(
+                           /* StaticVariables.date = SimpleDateFormat(
                                 "dd-MM-yyyy",
                                 Locale.getDefault()
-                            ).format(Date())
+                            ).format(Date())*/
 
                             ContextCompat.startForegroundService(
                                 this,
@@ -97,17 +97,10 @@ class CommonReceiver : BroadcastReceiver() {
 
             }
             Intent.ACTION_SCREEN_OFF -> {
-                /*val hourOff = calendar.get(Calendar.HOUR_OF_DAY)
-                val minOff = calendar.get(Calendar.MINUTE)
-                val secOff = calendar.get(Calendar.SECOND)
-*/
+
                 val screenOffTime = System.currentTimeMillis()
 
-                //Log.d("Minimal","hourOn: $hourOn,minOn: $minOn, secOn: $secOn\nhourOff: $hourOff,minOff: $minOff, secOff: $secOff")
-
                 if (isFirstScreenOn) {
-                    /*val timeDiff =
-                        Utils.getDifferencesOfTime(hourOn, minOn, secOn, hourOff, minOff, secOff)*/
                     val timeDiff = Utils.getDifferences(screeOnTime,screenOffTime)
                     Log.d("Minimal","Time Diff $timeDiff")
 
@@ -115,7 +108,7 @@ class CommonReceiver : BroadcastReceiver() {
                     context.apply {
                         if (timeDiff > getScreenOnTime(this)) {
                             saveScreenOnTime(this, timeDiff)
-                            StaticVariables.time = timeDiff
+                            //StaticVariables.time = timeDiff
                         }
                     }
 
@@ -124,7 +117,7 @@ class CommonReceiver : BroadcastReceiver() {
 
             }
             Intent.ACTION_TIME_TICK -> {
-                //Saat 00.00 ise bir sonraki gün ise
+                //Saat 00.00 ise - bir sonraki gün ise
                 if (calendar.get(Calendar.HOUR_OF_DAY).toString() == "0" && calendar.get(Calendar.MINUTE).toString() == "0") {
 
                     //isFirstScreenOn = false
@@ -135,7 +128,7 @@ class CommonReceiver : BroadcastReceiver() {
 
                         val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
                         //Tarihi Değiştir
-                        StaticVariables.date = date
+                        //StaticVariables.date = date
                         saveDate(context,date)
 
                     }

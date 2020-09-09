@@ -65,7 +65,7 @@ class Utils {
                 editTime.apply()
 
                 //Static Value Reset
-                StaticVariables.time = 0
+                //StaticVariables.time = 0
             }
         }
 

@@ -1,74 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.ExportDataFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/export_info"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Verileri dışarı aktarıp kaydedebilir yada bir uygulama geliştirebilirsin."
-        android:textAlignment="center"
-        android:textColor="@color/blue"
-        android:textSize="@dimen/chess_text_font_size"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.ExportDataFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:id="@+id/export_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/export_data_info"
+            android:textAlignment="center"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/chess_text_font_size"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
-        android:id="@+id/btn_csv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/textview_time_shape"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        android:text="Kaydet - csv"
-        android:textSize="@dimen/start_service_font_size"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/btn_xlxs"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="180dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_gonder"/>
-
-    <Button
-        android:id="@+id/btn_xlxs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/textview_time_shape"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        android:textSize="@dimen/start_service_font_size"
-        android:text="Kaydet - xlxs"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_csv"
-        tools:layout_editor_absoluteY="180dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_gonder"/>
-
-    <Button
-        android:id="@+id/btn_gonder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/textview_time_shape"
-        android:padding="4dp"
-        android:textSize="@dimen/start_service_font_size"
-        android:text="GÖNDER"
-        android:textColor="@color/white"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        <TextView
+            android:id="@+id/export_error_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textSize="@dimen/booklist_book_title_font_size"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:textColor="@color/red"
+            android:textAlignment="center"
+            android:text="@string/export_data_error_info"
+            app:layout_constraintTop_toBottomOf="@id/export_info"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_csv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_export"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="@string/save_csv"
+            android:textColor="@color/white"
+            android:textSize="@dimen/start_service_font_size"
+            android:enabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/btn_send"
+            app:layout_constraintEnd_toStartOf="@+id/btn_xlxs"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="180dp" />
+
+        <Button
+            android:id="@+id/btn_xlxs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_export"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="@string/save_xlsx"
+            android:textColor="@color/white"
+            android:textSize="@dimen/start_service_font_size"
+            android:enabled="false"
+            app:layout_constraintBottom_toTopOf="@+id/btn_send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_csv"
+            tools:layout_editor_absoluteY="180dp" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/button_export"
+            android:padding="4dp"
+            android:text="@string/send"
+            android:textColor="@color/white"
+            android:textSize="@dimen/start_service_font_size"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

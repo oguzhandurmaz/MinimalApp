@@ -60,8 +60,6 @@ class CountFragment : DaggerFragment() {
         _binding = FragmentCountBinding.inflate(inflater)
 
         //viewModel
-//        viewModelFactory =
-//            CountViewModel.CountViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(CountViewModel::class.java)
 
         //val adapter = RecyclerViewRegisterAdapter()
@@ -69,7 +67,7 @@ class CountFragment : DaggerFragment() {
 
 
         //Set Date
-        StaticVariables.date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+        //StaticVariables.date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         saveDate(
             requireContext(),
             SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
@@ -117,10 +115,10 @@ class CountFragment : DaggerFragment() {
                     ).format(Date())
                 )
 
-                StaticVariables.date == SimpleDateFormat(
+             /*   StaticVariables.date == SimpleDateFormat(
                     "dd-MM-yyyy",
                     Locale.getDefault()
-                ).format(Date())
+                ).format(Date())*/
             }
             if (isServiceRunning) {
                 requireActivity().stopService(intent)
@@ -138,7 +136,7 @@ class CountFragment : DaggerFragment() {
     }
 
 
-    fun setValuesToTextViews() {
+    private fun setValuesToTextViews() {
         val count = "${getString(R.string.count)}\n${getScreenOnCount(context)}"
         val time = "${getString(R.string.time)}\n${getScreenOnTime(context)}"
         val temp = getDate(requireContext()).split("-")
@@ -151,21 +149,6 @@ class CountFragment : DaggerFragment() {
     override fun onResume() {
         super.onResume()
         setValuesToTextViews()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("Minimal", "onDetach")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("Minimal", "onStart")
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.d("Minimal", "onAttach")
     }
 
     override fun onDestroyView() {

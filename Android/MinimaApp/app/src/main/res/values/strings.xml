@@ -25,5 +25,14 @@
     <string name="rubik">Rubik Küp</string>
 
     <string name="estimated_number">Tahmini Sayı</string>
+    <string name="choose_app">Uygulama Seçin</string>
+    <string name="error_file_save">Dosya oluşturulken hata oluştu.</string>
+    <string name="save_xlsx">Kaydet - xlsx</string>
+    <string name="save_csv">Kaydet - csv</string>
+    <string name="send">Gönder</string>
+    <string name="export_data_info">Verileri dışarı aktarıp kaydedebilir yada bir uygulama geliştirebilirsin.</string>
+    <string name="export_data_error_info">Veri çıkartılırken hata  Kayıtlı veri bulunmayabilir.</string>
+    <string name="data_saved">Dosya Kaydedildi.</string>
+    <string name="data_ready">Veri hazır</string>
 
 </resources>

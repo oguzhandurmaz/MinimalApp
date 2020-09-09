@@ -61,8 +61,8 @@ class CountService : Service() {
             registerReceiver(countReceiver, intentFilter)
 
             //Save Date
-            StaticVariables.date =
-                SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+           /* StaticVariables.date =
+                SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())*/
             saveDate(this,SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date()))
 
             isReceiverRegistered = true

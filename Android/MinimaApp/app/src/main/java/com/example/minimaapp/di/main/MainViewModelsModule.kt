@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class MainViewModelsModule{
+abstract class MainViewModelsModule {
 
     @Binds
     @IntoMap
@@ -29,10 +29,16 @@ abstract class MainViewModelsModule{
     @IntoMap
     @ViewModelKey(FetchedBooksViewModel::class)
     abstract fun bindFetchedBooksViewModel(viewModel: FetchedBooksViewModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(BookDetailViewModel::class)
     abstract fun bindBookDetailViewModel(viewModel: BookDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ExportDataViewModel::class)
+    abstract fun bindExportDataViewModel(viewModel: ExportDataViewModel): ViewModel
 
 
 }

@@ -13,5 +13,6 @@
     <color name="light_purple">#b6acbc</color>
     <color name="yellow">#F9DC5C</color>
     <color name="gray">#bfbfbf</color>
+    <color name="red">#ff3232</color>
 
 </resources>
