@@ -18,8 +18,8 @@
             android:padding="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
-            android:textSize="@dimen/rubik_text_font_size"
-            android:text="@string/rubik_info"/>
+            android:textSize="@dimen/chess_text_font_size"
+            android:text="@string/draughts_info"/>
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

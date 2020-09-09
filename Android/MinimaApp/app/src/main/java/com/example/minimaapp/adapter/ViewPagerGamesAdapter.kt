@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.minimaapp.R
 import com.example.minimaapp.utils.Constants.CHESS
+import com.example.minimaapp.utils.Constants.DRAUGHTS
+import com.example.minimaapp.utils.Constants.MANGALA
 import com.example.minimaapp.utils.Constants.RUBIK
 
 class ViewPagerGamesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -30,25 +32,45 @@ class ViewPagerGamesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     )
                 )
             }
-            else -> RubikViewHolder(
+            MANGALA -> MangalaViewHolder(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.layout_rubik,
+                    R.layout.layout_mangala,
                     parent,
                     false
                 )
             )
+            DRAUGHTS -> {
+                DraughtsViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.layout_draughts,
+                        parent,
+                        false
+                    )
+                )
+            }
+            else -> {
+                DraughtsViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.layout_draughts,
+                        parent,
+                        false
+                    )
+                )
+            }
         }
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 4
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> CHESS
             1 -> RUBIK
-            else -> RUBIK
+            2 -> MANGALA
+            3 -> DRAUGHTS
+            else -> DRAUGHTS
         }
     }
 
@@ -61,6 +83,13 @@ class ViewPagerGamesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class RubikViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    }
+
+    class MangalaViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+
+    }
+    class DraughtsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
     }
 }

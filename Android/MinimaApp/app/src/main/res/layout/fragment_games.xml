@@ -25,28 +25,35 @@
                >
             </androidx.appcompat.widget.Toolbar>
 
-            <LinearLayout
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:orientation="vertical">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                app:tabTextColor="@color/white"
+                app:tabSelectedTextColor="@color/light_pink"
+                app:tabMode="auto"
+                android:translationZ="4dp"
+                android:elevation="4dp"
+                app:tabIndicatorColor="@color/light_pink"
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab_layout"
-                    app:tabTextColor="@color/white"
-                    app:tabSelectedTextColor="@color/light_pink"
-                    app:tabMode="auto"
-                    android:translationZ="4dp"
-                    android:elevation="4dp"
-                    app:tabIndicatorColor="@color/light_pink"
-                    android:background="@color/blue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                android:fitsSystemWindows="true"/>
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+        </LinearLayout>
+
+
 
 
 

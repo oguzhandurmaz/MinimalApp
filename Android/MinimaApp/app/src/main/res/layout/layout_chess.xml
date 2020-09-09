@@ -19,7 +19,7 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
             android:textSize="@dimen/chess_text_font_size"
-            android:text="Satranç, iki oyuncu arasında satranç tahtası ve taşları ile oynanan bir masa oyunu. Dünya çapında turnuvaları düzenlenir ve bir spor dalı olarak kabul edilir.[1] Bu oyun satranç tahtası denilen 8×8'lik kare bir alan üzerinde 32 adet satranç taşıyla oynanır. Toplam 64 karenin yarısı siyah, yarısı beyaz renklerden oluşur. Taraflar beyaz ve siyah renkli taşları alırlar, her oyuncunun bir seferde bir hamle yapmasıyla oyun gelişir. Oyunun başında beyaz ve siyahların 16 taşı bulunur. Bunlar bir şah, bir vezir, iki kale, iki fil, iki at ve sekiz piyondan oluşur. Oyunun amacı karşı tarafın şahını mat etmektir."/>
+            android:text="@string/chess_info"/>
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

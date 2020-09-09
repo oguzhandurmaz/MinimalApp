@@ -13,7 +13,10 @@ import com.example.minimaapp.R
 import com.example.minimaapp.adapter.ViewPagerGamesAdapter
 import com.example.minimaapp.databinding.FragmentGamesBinding
 import com.example.minimaapp.utils.Constants.CHESS
+import com.example.minimaapp.utils.Constants.DRAUGHTS
+import com.example.minimaapp.utils.Constants.MANGALA
 import com.example.minimaapp.utils.Constants.RUBIK
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_games.*
@@ -28,6 +31,8 @@ class GamesFragment : DaggerFragment() {
     private val binding get() = _binding!!
 
     private var actionBar: androidx.appcompat.app.ActionBar? = null
+
+    private var mediator: TabLayoutMediator? = null
 
     @Inject
     lateinit var adapter: ViewPagerGamesAdapter
@@ -53,7 +58,8 @@ class GamesFragment : DaggerFragment() {
         //val adapter = ViewPagerGamesAdapter()
         binding.viewPager.adapter = adapter
 
-        TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab, position ->
+
+         mediator = TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab, position ->
             when(position){
                 CHESS -> {
                     tab.apply {
@@ -67,9 +73,21 @@ class GamesFragment : DaggerFragment() {
                         icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_rubik_cube)
                     }
                 }
-
+                MANGALA -> {
+                    tab.apply {
+                        text = getString(R.string.mangala)
+                        icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_mangala)
+                    }
+                }
+                DRAUGHTS -> {
+                    tab.apply {
+                        text = getString(R.string.draught)
+                        icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_dama)
+                    }
+                }
             }
-        }.attach()
+        }
+        mediator?.attach()
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -78,8 +96,12 @@ class GamesFragment : DaggerFragment() {
         actionBar?.show()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mediator?.detach()
+        mediator = null
+        actionBar = null
+        binding.viewPager.adapter = null
         _binding = null
     }
 

@@ -23,6 +23,8 @@
 
     <string name="chess">Satranç</string>
     <string name="rubik">Rubik Küp</string>
+    <string name="mangala">Mangala</string>
+    <string name="draught">Dama</string>
 
     <string name="estimated_number">Tahmini Sayı</string>
     <string name="choose_app">Uygulama Seçin</string>
@@ -35,4 +37,58 @@
     <string name="data_saved">Dosya Kaydedildi.</string>
     <string name="data_ready">Veri hazır</string>
 
+
+    <string name="chess_info">Satranç, iki oyuncu arasında satranç tahtası ve taşları ile oynanan bir masa oyunu.
+        Dünya çapında turnuvaları düzenlenir ve bir spor dalı olarak kabul edilir.
+        Bu oyun satranç tahtası denilen 8×8\'lik kare bir alan üzerinde 32 adet satranç taşıyla oynanır.
+        Toplam 64 karenin yarısı siyah, yarısı beyaz renklerden oluşur. Taraflar beyaz ve siyah renkli taşları alırlar,
+        her oyuncunun bir seferde bir hamle yapmasıyla oyun gelişir. Oyunun başında beyaz ve siyahların 16 taşı bulunur.
+        Bunlar bir şah, bir vezir, iki kale, iki fil, iki at ve sekiz piyondan oluşur. Oyunun amacı karşı tarafın şahını
+        mat etmektir.</string>
+
+    <string name="rubik_info">Rubik Küpü, Zekâ Küpü ya da Sabır Küpü; 1974 yılında Macar heykeltıraş ve
+        mimar Ernõ Rubik tarafından icat edilen mekanik bulmaca.
+        Hareketli yüzeylerden oluşan ve çoğunlukla plastikten yapılmış bir küp olan Rubik Küpü,
+        başlıca dört şekilde piyasaya sürülmüştür: 2×2×2\'lik Mini Rubik Küpü,
+        3×3×3\'lük standart küp, 4×4×4\'lük Rubik\'in İntikamı ve 5×5×5\'lik Profesörün Küpü.
+        6×6×6 ve 7×7×7\'lik küpler de hâlihazırda üretilmektedir.
+        Ayrıca 11×11×11 gibi çok katmanlı Rubik Küpleri de vardır.
+        "Rubik Küpü" diye bilinen standart 3×3×3\'lük modelin her yüzünde 9 kare olmak üzere alanı
+        toplam 54 karedir ve hacmi -ortadaki görünmeyen küp hariç- 26 birim3\'tür. Yüzeyindeki kareler
+        genel olarak altı farklı renk ile etiketlendirilmiştir.
+        Bulmaca çözüldüğünde küpün her yüzü tek renkten oluşur.
+        Yaratıcısı tarafından ilk olarak "Sihirli Küp" adı verilen bulmacaya
+        1980 yılında "Rubik Küpü" adı
+        verildi ve aynı yılın Mayıs ayında tüm dünyada dağıtımına başlandı. 2007 yılına kadar
+        300 milyon adet satıldığı ve dünyanın en çok satılan oyuncağı olduğu söylenir.</string>
+
+    <string name="mangala_info">
+        Mangala, bir Türk zeka oyunu olan Köçürme; dünyadaki yaygın adıyla Mankala oyunudur.
+        Gaziantep, Urfa, Hatay gibi illede oynanan Köçürme oyununun adıdır. Türkiye\'de son yıllarda
+        türetilen
+        Köçürme oyunu Mangala adıyla piyasaya sürülmüştür. Irak\'ta oynanan Halusa, Filistin\'de
+        oynanan El-mankala ve bir Baltık Alman oyunu olan Bohnenspiel ile çok benzerlik gösterir.
+        Mısır\'daki bedeviler arasında oynanan kuralları büyük ölçüde farklı olan Mangala isimli bir
+        başka bir oyun da bulunmaktadır.
+
+        16. yüzyıldan başlayarak Türk minyatürlerinde mangalaya ait tasvirler yer almıştır.
+        Metin And\'a göre bu oyun mankala oyunlarından bahseden ilk eserlerden olan Binbir
+        Gece Masalları\'nda anlatılan (15. gece) mankala ile doğrudan ilişkili olabilir.
+        Batılı kaynaklarda ise mangaladan ilk kez 1694\'te İngiliz oryantalist Thomas Hyde\'nin
+        çalısmasında bahsedilmiştir. Jean Antoine Guer\'in 1747 yılında Paris\'te yayımlanan
+        Moeurs et Usages des Turcs (Türkler\'in Gelenek ve Alışkanlıkları) isimli eserinde, oyundan
+        Mangola olarak bahsedilmektedir. İngilitere\'de 1860 başlarında Mangola yeni bir oyun
+        olarak tanıtılmış ve Jaques şirketi tarafından yayımlanmıştır.
+
+        Bugün Türkiye\'de klasik mangala oyun kuralları bilinmek ile birlikte Güneydoğu Anadolu\'da
+        Gaziantep gibi bölgelerde oynanan aynı isimdeki oyun daha çok Suriye kökenli La\'b Mecnuni
+        (Mecnun Oyunu) ile benzerlik gösterir. Ayrıca Anadolu\'da oynana farklı mankala türevleri
+        de bulunmaktadır: Erzurum\'daki Pıç, Safranbolu\'daki Altıev, Ilgın\'daki Meneli Taş, vb.
+    </string>
+
+    <string name="draughts_info">
+        Dama, iki kişinin karşı karşıya oynadığı bir masa oyunudur. Genellikle 8×8, 10×10
+        ya da 12×12\'lik dama tahtaları üzerinde oynanır. Satrancın aksine bütün taşlar
+        aynı biçimde hareket eder.
+    </string>
 </resources>
