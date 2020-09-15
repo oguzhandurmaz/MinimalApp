@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import javax.inject.Provider
 
 
+@Suppress("UNCHECKED_CAST")
 class ViewModelProviderFactory @Inject
 constructor(private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) :
     ViewModelProvider.Factory {
@@ -30,7 +31,7 @@ constructor(private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcard
 
         // return the Provider
         try {
-            return creator!!.get() as T
+            return creator.get() as T
         } catch (e: Exception) {
             throw RuntimeException(e)
         }

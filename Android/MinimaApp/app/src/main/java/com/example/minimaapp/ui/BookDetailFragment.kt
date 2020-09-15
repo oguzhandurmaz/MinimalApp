@@ -28,6 +28,7 @@ import com.example.minimaapp.viewmodel.BookDetailViewModel
 import com.example.minimaapp.viewmodel.BookDetailViewModel.*
 import com.example.minimaapp.data.table.BookTable
 import com.example.minimaapp.MainActivity
+import com.example.minimaapp.R
 import com.example.minimaapp.databinding.FragmentBookDetailBinding
 import com.example.minimaapp.viewmodel.ViewModelProviderFactory
 import com.google.android.material.appbar.AppBarLayout
@@ -57,13 +58,6 @@ class BookDetailFragment : DaggerFragment() {
 
         sharedElementEnterTransition =
             TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val args = BookDetailFragmentArgs.fromBundle(requireArguments())
-
-        //binding.imageUrl = args.imageUrl
     }
 
     override fun onCreateView(
@@ -106,7 +100,7 @@ class BookDetailFragment : DaggerFragment() {
 
 
         //Collapsing Bar kapanınca Add Favorite göster açılınca gizle.
-        binding.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                binding.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             binding.btnAddFavorite.clearAnimation()
             if( ((appBarLayout.totalScrollRange + verticalOffset).toFloat() / appBarLayout.totalScrollRange) == 0.0f)
             {
@@ -150,7 +144,7 @@ class BookDetailFragment : DaggerFragment() {
                 if (it.title == title && it.author == author) {
                     isInDb = true
                     binding.btnAddFavorite.isEnabled = false
-                    binding.btnAddFavorite.text = "Added Favorites"
+                    binding.btnAddFavorite.text = getString(R.string.added_favorite)
                     return@forEach
                 }
             }
@@ -160,9 +154,9 @@ class BookDetailFragment : DaggerFragment() {
         viewModel.success.observe(viewLifecycleOwner, Observer {
             if (it) {
                 binding.btnAddFavorite.isEnabled = false
-                binding.btnAddFavorite.text = "Added Favorites"
+                binding.btnAddFavorite.text = getString(R.string.added_favorite)
             } else {
-                Toast.makeText(requireContext(), "Couldnt Add to Favorites", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), getString(R.string.add_favorite_error), Toast.LENGTH_SHORT)
                     .show()
             }
         })

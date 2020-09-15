@@ -56,9 +56,6 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(roomDatabase == null){
-            Log.d("Main","BookDao Null")
-        }
 
         setSupportActionBar(findViewById(R.id.actionBar))
 
@@ -78,10 +75,5 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.host_fragment)
         return NavigationUI.navigateUp(navController,drawer_layout)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
     }
 }

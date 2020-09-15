@@ -16,6 +16,7 @@ import com.bumptech.glide.RequestManager
 import com.example.minimaapp.CountService
 import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewRegisterAdapter
+import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.databinding.FragmentCountBinding
 import com.example.minimaapp.utils.StaticVariables
 import com.example.minimaapp.utils.Utils.Companion.getDate
@@ -92,7 +93,7 @@ class CountFragment : DaggerFragment() {
         
 
         binding.btnStart.setOnClickListener {
-            // viewModel.insert(Count(0, "20-20-1010", 10, 20))
+            //viewModel.insert(Count(0, "20-20-1010", 10, 20))
             isServiceRunning = getServiceState(requireContext())
 
             val intent = Intent(requireActivity(), CountService::class.java)

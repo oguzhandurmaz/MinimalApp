@@ -8,6 +8,8 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.example.minimaapp.utils.Constants.CHANNEL_ID
+import com.example.minimaapp.utils.Constants.CHANNEL_NAME
 import com.example.minimaapp.utils.StaticVariables
 import com.example.minimaapp.utils.Utils.Companion.saveDate
 import com.example.minimaapp.utils.Utils.Companion.saveServiceState
@@ -26,7 +28,7 @@ class CountService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val count = intent?.getIntExtra("count",0) ?: 0
-        val time = intent?.getIntExtra("time",0) ?: 0
+        //val time = intent?.getIntExtra("time",0) ?: 0
 
             createNotificationChannel()
 
@@ -36,14 +38,14 @@ class CountService : Service() {
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        val notification = NotificationCompat.Builder(this, "channelId")
-            .setContentTitle("Minimal App")
-            .setContentText("Screen On Count $count")
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText("${getString(R.string.screen_on_count)}: $count")
             .setContentIntent(pendingIntent)
-            .setSmallIcon(R.drawable.ic_image)
-            .setStyle(NotificationCompat.InboxStyle()
+            .setSmallIcon(R.drawable.ic_notification_icon)
+            /*.setStyle(NotificationCompat.InboxStyle()
                 .addLine("Screen On Count $count")
-                .addLine("Longest Screen Open Time: 10"))
+                .addLine("Longest Screen Open Time: 10"))*/
             .setPriority(NotificationCompat.PRIORITY_LOW)
 
         startForeground(1, notification.build())
@@ -74,8 +76,8 @@ class CountService : Service() {
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                "channelId",
-                "channelName",
+                CHANNEL_ID,
+                CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_MIN
             ).apply {
                 enableVibration(false)

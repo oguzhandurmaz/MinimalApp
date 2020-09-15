@@ -14,7 +14,8 @@ import javax.inject.Singleton
     [
         AndroidSupportInjectionModule::class,
         ActivityBuildersModule::class,
-        AppModule::class
+        AppModule::class,
+        BroadcastReceiverModule::class
     ]
 )
 interface AppComponent: AndroidInjector<BaseApplication>{

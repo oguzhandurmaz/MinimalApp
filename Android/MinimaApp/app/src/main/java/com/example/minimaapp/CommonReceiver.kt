@@ -6,6 +6,8 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.databinding.adapters.CalendarViewBindingAdapter.setDate
+import com.example.minimaapp.data.table.Count
+import com.example.minimaapp.repo.CountRepository
 import com.example.minimaapp.utils.StaticVariables
 import com.example.minimaapp.utils.Utils
 import com.example.minimaapp.utils.Utils.Companion.getDate
@@ -17,10 +19,16 @@ import com.example.minimaapp.utils.Utils.Companion.saveAndResetValues
 import com.example.minimaapp.utils.Utils.Companion.saveDate
 import com.example.minimaapp.utils.Utils.Companion.saveScreenOnCount
 import com.example.minimaapp.utils.Utils.Companion.saveScreenOnTime
+import dagger.android.AndroidInjection
+import dagger.android.DaggerBroadcastReceiver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class CommonReceiver : BroadcastReceiver() {
+class CommonReceiver : DaggerBroadcastReceiver() {
 
 
 
@@ -28,11 +36,17 @@ class CommonReceiver : BroadcastReceiver() {
     private var minOn = 0
     private var secOn = 0
 
+    @Inject
+    lateinit var countRepository: CountRepository
+
     private var screeOnTime: Long = 0L
 
     private var isFirstScreenOn = false
 
     override fun onReceive(context: Context?, intent: Intent?) {
+        AndroidInjection.inject(this,context)
+        super.onReceive(context, intent)
+
         val action = intent?.action
 
         val calendar = Calendar.getInstance()
@@ -88,8 +102,6 @@ class CommonReceiver : BroadcastReceiver() {
 
                 sendCountToService(context)
 
-                Log.d("Minimal", "Screen On")
-
                 if (!isFirstScreenOn) isFirstScreenOn = true
 
 
@@ -102,7 +114,6 @@ class CommonReceiver : BroadcastReceiver() {
 
                 if (isFirstScreenOn) {
                     val timeDiff = Utils.getDifferences(screeOnTime,screenOffTime)
-                    Log.d("Minimal","Time Diff $timeDiff")
 
                     //En uzun açık kalma süresi bir öncekinden büyükse kaydet.
                     context.apply {
@@ -121,6 +132,18 @@ class CommonReceiver : BroadcastReceiver() {
                 if (calendar.get(Calendar.HOUR_OF_DAY).toString() == "0" && calendar.get(Calendar.MINUTE).toString() == "0") {
 
                     //isFirstScreenOn = false
+                    //TODO Save to Database
+                    val count = Count(
+                        0,
+                        getDate(context),
+                        getScreenOnCount(context),
+                        getScreenOnTime(context)
+                    )
+                    CoroutineScope(IO).launch {
+                        countRepository.insert(count)
+                    }
+
+
 
                     context?.apply {
                         //save And Reset Values

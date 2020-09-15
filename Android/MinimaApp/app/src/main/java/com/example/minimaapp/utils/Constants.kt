@@ -2,6 +2,9 @@ package com.example.minimaapp.utils
 
 object Constants {
 
+    const val CHANNEL_ID ="ScreenOnChannel"
+    const val CHANNEL_NAME = "MinimalNotificationChannel"
+
     const val FETCHED_BOOK_URL = "https://1000kitap.com/"
 
     const val CHESS: Int = 0

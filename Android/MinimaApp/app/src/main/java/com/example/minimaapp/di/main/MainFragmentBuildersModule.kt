@@ -1,5 +1,6 @@
 package com.example.minimaapp.di.main
 
+import com.example.minimaapp.CommonReceiver
 import com.example.minimaapp.ui.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
