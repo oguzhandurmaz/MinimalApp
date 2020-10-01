@@ -1,21 +1,16 @@
 package com.example.minimaapp
 
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.core.content.ContextCompat
-import androidx.databinding.adapters.CalendarViewBindingAdapter.setDate
 import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.repo.CountRepository
-import com.example.minimaapp.utils.StaticVariables
 import com.example.minimaapp.utils.Utils
 import com.example.minimaapp.utils.Utils.Companion.getDate
 import com.example.minimaapp.utils.Utils.Companion.getScreenOnCount
 import com.example.minimaapp.utils.Utils.Companion.getScreenOnTime
 import com.example.minimaapp.utils.Utils.Companion.getServiceState
 import com.example.minimaapp.utils.Utils.Companion.resetValues
-import com.example.minimaapp.utils.Utils.Companion.saveAndResetValues
 import com.example.minimaapp.utils.Utils.Companion.saveDate
 import com.example.minimaapp.utils.Utils.Companion.saveScreenOnCount
 import com.example.minimaapp.utils.Utils.Companion.saveScreenOnTime
@@ -73,7 +68,7 @@ class CommonReceiver : DaggerBroadcastReceiver() {
                             }
                         } else {
                             //Verileri Kaydet ve Resetle - Yeni güne başla
-                            saveAndResetValues(this)
+                            saveCountToDatabase(context)
                             saveDate(context,SimpleDateFormat(
                                 "dd-MM-yyyy",
                                 Locale.getDefault()
@@ -104,9 +99,6 @@ class CommonReceiver : DaggerBroadcastReceiver() {
 
                 if (!isFirstScreenOn) isFirstScreenOn = true
 
-
-                //saveValues(context)
-
             }
             Intent.ACTION_SCREEN_OFF -> {
 
@@ -131,30 +123,13 @@ class CommonReceiver : DaggerBroadcastReceiver() {
                 //Saat 00.00 ise - bir sonraki gün ise
                 if (calendar.get(Calendar.HOUR_OF_DAY).toString() == "0" && calendar.get(Calendar.MINUTE).toString() == "0") {
 
-                    //isFirstScreenOn = false
-                    //TODO Save to Database
-                    val count = Count(
-                        0,
-                        getDate(context),
-                        getScreenOnCount(context),
-                        getScreenOnTime(context)
-                    )
-                    CoroutineScope(IO).launch {
-                        countRepository.insert(count)
-                    }
+                    //Save Count and Reset
+                    saveCountToDatabase(context)
 
-
-
-                    context?.apply {
-                        //save And Reset Values
-                        saveAndResetValues(this)
-
-                        val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
-                        //Tarihi Değiştir
-                        //StaticVariables.date = date
-                        saveDate(context,date)
-
-                    }
+                    val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+                    //Tarihi Değiştir
+                    //StaticVariables.date = date
+                    saveDate(context,date)
                 }
             }
         }
@@ -166,7 +141,20 @@ class CommonReceiver : DaggerBroadcastReceiver() {
                 putExtra("count", getScreenOnCount(it))
                 ContextCompat.startForegroundService(it, this)
             }
-
         }
+    }
+
+    private fun saveCountToDatabase(context: Context?){
+        val count = Count(
+            0,
+            getDate(context),
+            getScreenOnCount(context),
+            getScreenOnTime(context)
+        )
+        CoroutineScope(IO).launch {
+            countRepository.insert(count)
+        }
+
+        resetValues(context)
     }
 }

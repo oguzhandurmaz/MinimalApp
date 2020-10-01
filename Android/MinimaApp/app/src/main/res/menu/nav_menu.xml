@@ -6,27 +6,27 @@
 
         <item
             android:id="@+id/countFragment"
-            android:title="Count"
+            android:title="@string/count"
             />
 
         <item
             android:id="@+id/graphicsFragment"
-            android:title="Graphics"/>
+            android:title="@string/graphics"/>
 
         <item
             android:id="@+id/fetchedBooksFragment"
-            android:title="Books"/>
+            android:title="@string/books"/>
 
         <item
             android:id="@+id/favoriteBooksFragment"
-            android:title="Favourite Books"/>
+            android:title="@string/favourite_books"/>
         <item
             android:id="@+id/gamesFragment"
-            android:title="Games"/>
+            android:title="@string/games"/>
 
         <item
             android:id="@+id/exportDataFragment"
-            android:title="Export Data"/>
+            android:title="@string/export_data"/>
 
     </group>
 

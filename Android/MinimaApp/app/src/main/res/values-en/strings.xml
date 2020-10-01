@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StawayScreen</string>
+    <string name="add_favorite">Add Favorite</string>
+    <string name="add_favorite_error">Error while Adding to Favorites</string>
+    <string name="added_favorite">Added Favorites</string>
+    <string name="book_detail_fragment">Book Info</string>
+    <string name="charts_fragment">Graphics</string>
+    <string name="chess">Chess</string>
+    <string name="choose_app">Choose App</string>
+    <string name="count">Count</string>
+    <string name="graphics">Graphics</string>
+    <string name="books">Books</string>
+    <string name="favourite_books">Favorite Books</string>
+    <string name="games">Games</string>
+    <string name="export_data">Export Data</string>
+    <string name="data_ready">Data ready</string>
+    <string name="data_saved">File saved</string>
+    <string name="date">Date</string>
+    <string name="draught">Draught</string>
+    <string name="error_file_save">Error while creating file</string>
+    <string name="estimated_number">Estimated Number</string>
+    <string name="export_data_error_info">Cant find saved data</string>
+    <string name="export_data_info">You can export or save data</string>
+    <string name="favorite_fragment">Favorite Books</string>
+    <string name="fetched_book_fragment">New Books - Latest 25</string>
+    <string name="games_fragment">Games</string>
+    <string name="general_info_fragment">General Infos</string>
+    <string name="load_book_error">Book couldnt load</string>
+    <string name="mangala">Mangala</string>
+    <string name="no_macth_books">There is no match book</string>
+    <string name="rubik">Rubic Cube</string>
+    <string name="save_csv">Save - csv</string>
+    <string name="save_xlsx">Save - xlsx</string>
+    <string name="screen_on_count">Screen On Count</string>
+    <string name="send">Send</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="time">Time</string>
+</resources>

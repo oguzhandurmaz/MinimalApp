@@ -3,15 +3,24 @@ package com.example.minimaapp.utils
 import android.content.Context
 import com.example.minimaapp.data.CountRoomDatabase
 import com.example.minimaapp.data.table.Count
+import com.example.minimaapp.di.DaggerAppComponent
 import com.example.minimaapp.repo.CountRepository
+import dagger.android.DaggerBroadcastReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 import kotlin.math.abs
 
 class Utils {
+
+
     companion object {
+
+       /* @Inject
+        lateinit var countRepository: CountRepository*/
 
         fun getDifferences(screenOn: Long,screenOff: Long): Int{
             /*
@@ -81,30 +90,6 @@ class Utils {
             return context?.getSharedPreferences("minimal_app", Context.MODE_PRIVATE)?.run {
                 getBoolean("service_state", false)
             } ?: false
-        }
-
-        fun saveAndResetValues(context: Context?) {
-            context?.apply {
-                //Database'e Verileri Kaydet
-                val countDao = CountRoomDatabase.getDataBase(this).countDao()
-                val countRepository = CountRepository(countDao)
-                //Save Values
-                CoroutineScope(Dispatchers.IO).launch {
-                    withContext(Dispatchers.Default) {
-                        countRepository.insert(
-                            Count(
-                                0,
-                                getDate(context),
-                                getScreenOnCount(this@apply),
-                                getScreenOnTime(this@apply).toInt()
-                            )
-                        )
-                    }
-                    //Reset Values
-                    resetValues(this@apply)
-                }
-            }
-
         }
 
         fun saveDate(context: Context?,date: String){

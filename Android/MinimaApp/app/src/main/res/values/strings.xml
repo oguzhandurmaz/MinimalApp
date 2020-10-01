@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MinimalApp</string>
+    <string name="app_name">StawayScreen</string>
 
     <string name="screen_on_count">Ekran açılma sayısı</string>
 
@@ -13,10 +13,15 @@
     <string name="date">Tarih</string>
     <string name="count">Sayı</string>
     <string name="time">Zaman</string>
+    <string name="graphics">Grafikler</string>
+    <string name="books">Kitaplar</string>
+    <string name="favourite_books">Favori Kitaplar</string>
+    <string name="games">Oyunlar</string>
+    <string name="export_data">Veriyi Dışa Aktar</string>
     <string name="add_favorite">Favorilere Ekle</string>
     <string name="added_favorite">Favorilere Eklendi</string>
-    <string name="start">start</string>
-    <string name="stop">stop</string>
+    <string name="start">Başla</string>
+    <string name="stop">Durdur</string>
     <string name="no_macth_books">Eşleşen Kitap Bulunamadı</string>
     <string name="load_book_error">Kitaplar Yüklenemedi</string>
 
@@ -37,7 +42,7 @@
     <string name="data_ready">Veri hazır</string>
 
 
-    <string name="chess_info">Satranç, iki oyuncu arasında satranç tahtası ve taşları ile oynanan bir masa oyunu.
+    <string name="chess_info" translatable="false">Satranç, iki oyuncu arasında satranç tahtası ve taşları ile oynanan bir masa oyunu.
         Dünya çapında turnuvaları düzenlenir ve bir spor dalı olarak kabul edilir.
         Bu oyun satranç tahtası denilen 8×8\'lik kare bir alan üzerinde 32 adet satranç taşıyla oynanır.
         Toplam 64 karenin yarısı siyah, yarısı beyaz renklerden oluşur. Taraflar beyaz ve siyah renkli taşları alırlar,
@@ -45,7 +50,7 @@
         Bunlar bir şah, bir vezir, iki kale, iki fil, iki at ve sekiz piyondan oluşur. Oyunun amacı karşı tarafın şahını
         mat etmektir.</string>
 
-    <string name="rubik_info">Rubik Küpü, Zekâ Küpü ya da Sabır Küpü; 1974 yılında Macar heykeltıraş ve
+    <string name="rubik_info" translatable="false">Rubik Küpü, Zekâ Küpü ya da Sabır Küpü; 1974 yılında Macar heykeltıraş ve
         mimar Ernõ Rubik tarafından icat edilen mekanik bulmaca.
         Hareketli yüzeylerden oluşan ve çoğunlukla plastikten yapılmış bir küp olan Rubik Küpü,
         başlıca dört şekilde piyasaya sürülmüştür: 2×2×2\'lik Mini Rubik Küpü,
@@ -61,7 +66,7 @@
         verildi ve aynı yılın Mayıs ayında tüm dünyada dağıtımına başlandı. 2007 yılına kadar
         300 milyon adet satıldığı ve dünyanın en çok satılan oyuncağı olduğu söylenir.</string>
 
-    <string name="mangala_info">
+    <string name="mangala_info" translatable="false">
         Mangala, bir Türk zeka oyunu olan Köçürme; dünyadaki yaygın adıyla Mankala oyunudur.
         Gaziantep, Urfa, Hatay gibi illede oynanan Köçürme oyununun adıdır. Türkiye\'de son yıllarda
         türetilen
@@ -85,10 +90,11 @@
         de bulunmaktadır: Erzurum\'daki Pıç, Safranbolu\'daki Altıev, Ilgın\'daki Meneli Taş, vb.
     </string>
 
-    <string name="draughts_info">
+    <string name="draughts_info" translatable="false">
         Dama, iki kişinin karşı karşıya oynadığı bir masa oyunudur. Genellikle 8×8, 10×10
         ya da 12×12\'lik dama tahtaları üzerinde oynanır. Satrancın aksine bütün taşlar
         aynı biçimde hareket eder.
     </string>
     <string name="add_favorite_error">Favorilere Eklenirken Hata Oluştu</string>
+
 </resources>

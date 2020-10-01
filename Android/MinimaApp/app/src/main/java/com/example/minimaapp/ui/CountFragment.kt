@@ -1,10 +1,8 @@
 package com.example.minimaapp.ui
 
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,23 +10,24 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.RequestManager
 import com.example.minimaapp.CountService
 import com.example.minimaapp.R
 import com.example.minimaapp.adapter.RecyclerViewRegisterAdapter
 import com.example.minimaapp.data.table.Count
 import com.example.minimaapp.databinding.FragmentCountBinding
-import com.example.minimaapp.utils.StaticVariables
+import com.example.minimaapp.repo.CountRepository
+import com.example.minimaapp.utils.Utils
 import com.example.minimaapp.utils.Utils.Companion.getDate
 import com.example.minimaapp.utils.Utils.Companion.getScreenOnCount
 import com.example.minimaapp.utils.Utils.Companion.getScreenOnTime
 import com.example.minimaapp.utils.Utils.Companion.getServiceState
-import com.example.minimaapp.utils.Utils.Companion.saveAndResetValues
 import com.example.minimaapp.utils.Utils.Companion.saveDate
-import com.example.minimaapp.utils.Utils.Companion.saveServiceState
 import com.example.minimaapp.viewmodel.CountViewModel
 import com.example.minimaapp.viewmodel.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -41,10 +40,14 @@ class CountFragment : DaggerFragment() {
     private var _binding: FragmentCountBinding? = null
     private val binding get() = _binding!!
 
-    @Inject lateinit var adapter: RecyclerViewRegisterAdapter
+    @Inject
+    lateinit var adapter: RecyclerViewRegisterAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelProviderFactory
+
+    @Inject
+    lateinit var countRepository: CountRepository
 
 
     //ViewModel
@@ -66,6 +69,7 @@ class CountFragment : DaggerFragment() {
         //val adapter = RecyclerViewRegisterAdapter()
         binding.recyclerview.adapter = adapter
 
+        val a = countRepository
 
         //Set Date
         //StaticVariables.date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
@@ -90,7 +94,7 @@ class CountFragment : DaggerFragment() {
         } else {
             binding.btnStart.text = getString(R.string.start)
         }
-        
+
 
         binding.btnStart.setOnClickListener {
             //viewModel.insert(Count(0, "20-20-1010", 10, 20))
@@ -107,7 +111,7 @@ class CountFragment : DaggerFragment() {
                 intent.putExtra("count", getScreenOnCount(requireContext()))
             } else {
                 // Önceki verileri kaydedip sıfırla - Bir sonraki güne başla
-                saveAndResetValues(requireContext())
+                saveCountToDatabase()
                 //Save Date
                 saveDate(
                     requireContext(), SimpleDateFormat(
@@ -116,10 +120,10 @@ class CountFragment : DaggerFragment() {
                     ).format(Date())
                 )
 
-             /*   StaticVariables.date == SimpleDateFormat(
-                    "dd-MM-yyyy",
-                    Locale.getDefault()
-                ).format(Date())*/
+                /*   StaticVariables.date == SimpleDateFormat(
+                       "dd-MM-yyyy",
+                       Locale.getDefault()
+                   ).format(Date())*/
             }
             if (isServiceRunning) {
                 requireActivity().stopService(intent)
@@ -145,6 +149,20 @@ class CountFragment : DaggerFragment() {
         binding.textCount.text = count
         binding.textTime.text = time
         binding.textDate.text = date
+    }
+
+    private fun saveCountToDatabase() {
+        val count = Count(
+            0,
+            getDate(requireContext()),
+            getScreenOnCount(requireContext()),
+            getScreenOnTime(requireContext())
+        )
+        CoroutineScope(Dispatchers.IO).launch {
+            countRepository.insert(count)
+        }
+
+        Utils.resetValues(requireContext())
     }
 
     override fun onResume() {
