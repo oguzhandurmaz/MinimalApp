@@ -21,3 +21,9 @@ Including Android Application that can collect daily data
 
 ## ML Application File
 Including Machine Learning Applications and collected data
+
+### Libraries
+* Jsoup
+* MPAndroidChart
+* Dagger - Android
+* Glide
